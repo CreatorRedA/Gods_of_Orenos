@@ -20,6 +20,7 @@ public class TwitchClient : MonoBehaviour
     int[] arrayOfVotes = new int[3];
     float timer;
     float maxTime = 10f;
+    List<string> votedUser = new List<string>();
 
     int numberOfCube = 3;
 
@@ -33,24 +34,42 @@ public class TwitchClient : MonoBehaviour
         ThreeCubes[maxIndex].GetComponent<Renderer>().material.color = Color.red;
     }
 
+    private void MymessageReceivedFuntion(object sender, TwitchLib.Client.Events.OnMessageReceivedArgs e)
+    {
+        
 
-    void vote(string message)
-    { 
-        if (message.Equals("1"))
+        if (!votedUser.Contains(e.ChatMessage.Username))
         {
-            arrayOfVotes[0]++;
-            Debug.Log("number of votes for cube 1 " + arrayOfVotes[0]);
+            Debug.Log(e.ChatMessage.Username + "just voted");
+            if (e.ChatMessage.Message.Equals("1"))
+            {
+                arrayOfVotes[0]++;
+                Debug.Log("number of votes for cube 1 " + arrayOfVotes[0]);
+            }
+            else if (e.ChatMessage.Message.Equals("2"))
+            {
+                arrayOfVotes[1]++;
+                Debug.Log("number of votes for cube 2 " + arrayOfVotes[1]);
+            }
+            else if (e.ChatMessage.Message.Equals("3"))
+            {
+                arrayOfVotes[2]++;
+                Debug.Log("number of votes for cube 3 " + arrayOfVotes[2]);
+            }
+            votedUser.Add(e.ChatMessage.Username);
         }
-        else if (message.Equals("2"))
+        else
         {
-            arrayOfVotes[1]++;
-            Debug.Log("number of votes for cube 2 " + arrayOfVotes[1]);
+            Debug.Log(e.ChatMessage.Username + "is trying to vote again!");
         }
-        else if (message.Equals("3"))
-        {
-            arrayOfVotes[2]++;
-            Debug.Log("number of votes for cube 3 " + arrayOfVotes[2]);
-        }
+
+    }
+
+    void vote(string message, string userName)
+    {
+        
+        
+        
     }
         
         
@@ -59,9 +78,13 @@ public class TwitchClient : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        List<string> votedUser = new List<string>();
+        votedUser.Add("0");
+
         arrayOfVotes[0] = 0;
         arrayOfVotes[1] = 0;
         arrayOfVotes[2] = 0;
+
         ThreeCubes = new GameObject[cubesToChoose];
         for (int x = 0; x < numberOfCube; x++)
         {
@@ -82,10 +105,7 @@ public class TwitchClient : MonoBehaviour
 
     }
 
-    private void MymessageReceivedFuntion(object sender, TwitchLib.Client.Events.OnMessageReceivedArgs e)
-    {
-        vote(e.ChatMessage.Message);
-    }
+    
     void test_message()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
