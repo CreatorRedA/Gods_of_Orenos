@@ -16,11 +16,14 @@ public class TwitchClient : MonoBehaviour
     public GameObject[] ThreeCubes;
     public GameObject cubeprefabe;
     public Text countDownTimer;
+    public Text voteResult;
     Vector2 cubePos;
     int[] arrayOfVotes = new int[3];
     float timer;
     float maxTime = 10f;
     List<string> votedUser = new List<string>();
+
+    bool countNow;
 
     int numberOfCube = 3;
 
@@ -32,6 +35,8 @@ public class TwitchClient : MonoBehaviour
         int indexValue = arrayOfVotes.Max();
         int maxIndex = arrayOfVotes.ToList().IndexOf(indexValue);
         ThreeCubes[maxIndex].GetComponent<Renderer>().material.color = Color.red;
+        countNow = false;
+        voteResult.text = ("Cube No." + (maxIndex+1) + " is selected!");
     }
 
     private void MymessageReceivedFuntion(object sender, TwitchLib.Client.Events.OnMessageReceivedArgs e)
@@ -44,23 +49,23 @@ public class TwitchClient : MonoBehaviour
             if (e.ChatMessage.Message.Equals("1"))
             {
                 arrayOfVotes[0]++;
-                Debug.Log("number of votes for cube 1 " + arrayOfVotes[0]);
+                Debug.Log("number of votes for cube 1: " + arrayOfVotes[0]);
             }
             else if (e.ChatMessage.Message.Equals("2"))
             {
                 arrayOfVotes[1]++;
-                Debug.Log("number of votes for cube 2 " + arrayOfVotes[1]);
+                Debug.Log("number of votes for cube 2: " + arrayOfVotes[1]);
             }
             else if (e.ChatMessage.Message.Equals("3"))
             {
                 arrayOfVotes[2]++;
-                Debug.Log("number of votes for cube 3 " + arrayOfVotes[2]);
+                Debug.Log("number of votes for cube 3: " + arrayOfVotes[2]);
             }
             votedUser.Add(e.ChatMessage.Username);
         }
         else
         {
-            Debug.Log(e.ChatMessage.Username + "is trying to vote again!");
+            Debug.Log(e.ChatMessage.Username + " is trying to vote again!");
         }
 
     }
@@ -84,6 +89,8 @@ public class TwitchClient : MonoBehaviour
         arrayOfVotes[0] = 0;
         arrayOfVotes[1] = 0;
         arrayOfVotes[2] = 0;
+
+        countNow = true;
 
         ThreeCubes = new GameObject[cubesToChoose];
         for (int x = 0; x < numberOfCube; x++)
@@ -116,13 +123,27 @@ public class TwitchClient : MonoBehaviour
                 "God of Orenos is coming soon!");
         }
     }
+
+    void countDown ()
+    {
+        if (timer < 10)
+        {
+            countDownTimer.text = (maxTime - timer).ToString();
+            timer += Time.deltaTime;
+        }
+        else
+        {
+            countDownTimer.text = "Countdown finished!".ToString();
+        }
+
+    }
+
     // Update is called once per frame
     void Update()
     {
-        countDownTimer.text = (maxTime - timer).ToString();
-        timer += Time.deltaTime;
+        countDown();
         test_message();
-        if (timer>10 && timer<11)
+        if (timer > 10 && countNow == true)
         {
             countVote();
         }
