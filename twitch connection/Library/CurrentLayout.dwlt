@@ -42,8 +42,8 @@ MonoBehaviour:
     y: 0
     width: 401
     height: 418
-  m_MinSize: {x: 202, y: 224}
-  m_MaxSize: {x: 4002, y: 4024}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -73,7 +73,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 224}
   m_MaxSize: {x: 8006, y: 4024}
   vertical: 0
-  controlID: 12
+  controlID: 33
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_MinSize: {x: 681, y: 348}
   m_MaxSize: {x: 12006, y: 8048}
   vertical: 0
-  controlID: 10
+  controlID: 31
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 348}
   m_MaxSize: {x: 8006, y: 8048}
   vertical: 1
-  controlID: 11
+  controlID: 32
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -385,9 +385,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 499.74036, y: 513.9579, z: -8.332689}
+    m_Target: {x: 527.265, y: 447.7058, z: -14.181107}
     speed: 2
-    m_Value: {x: 499.74036, y: 513.9579, z: -8.332689}
+    m_Value: {x: 527.265, y: 447.7058, z: -14.181107}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -419,9 +419,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 840.83984
+    m_Target: 1077.3784
     speed: 2
-    m_Value: 840.83984
+    m_Value: 1077.3784
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -482,7 +482,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 491.2
-    width: 1079
+    width: 1207
     height: 293
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SearchFilter:
@@ -497,19 +497,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Scenes
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\GoogleDrive\Hampshire College\Div3\Game Design\twitch connection
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c6270000
-    m_LastClickedID: 10182
+    m_SelectedIDs: d8270000
+    m_LastClickedID: 10200
     m_ExpandedIDs: 00000000c627000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -563,8 +563,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: d42a0000
-    m_LastClickedInstanceID: 10964
+    m_SelectedInstanceIDs: 34340000
+    m_LastClickedInstanceID: 13364
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c623000012400000042c000000000000d02d0000
     m_RenameOverlay:
@@ -648,9 +648,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 6a310000
-      m_LastClickedID: 12650
-      m_ExpandedIDs: e2e8fffff6e8ffff5aebffff62f8ffff76f8ffffdefaffff98fbffffe82a00006a310000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 04ebffff18ebffff7cedffff88eeffff9ceeffff04f1ffff2af1ffff36f1ffff42f1ffff4ef1ffffb0f2ffffc4f2ffffc6f2ffffecf2ffff00f3ffff64f5ffffb0fbffff442a0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 

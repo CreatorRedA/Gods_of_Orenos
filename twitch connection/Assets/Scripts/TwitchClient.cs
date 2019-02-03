@@ -24,6 +24,7 @@ public class TwitchClient : MonoBehaviour
     List<string> votedUser = new List<string>();
 
     bool countNow;
+    bool noVote;
 
     int numberOfCube = 3;
 
@@ -31,18 +32,27 @@ public class TwitchClient : MonoBehaviour
 
 
     void countVote(){
-        Debug.Log("finished");
+        Debug.Log("Finished");
         int indexValue = arrayOfVotes.Max();
         int maxIndex = arrayOfVotes.ToList().IndexOf(indexValue);
-        ThreeCubes[maxIndex].GetComponent<Renderer>().material.color = Color.red;
+
+        //ensure at least one vote is accepted, if no one vote, show it somewhere
+        if (noVote != true)
+        {
+            ThreeCubes[maxIndex].GetComponent<Renderer>().material.color = Color.red;
+            voteResult.text = "Cube No." + (maxIndex + 1) + " is selected!";
+        }
+        else
+        {
+            voteResult.text = "No vote received!";
+        }
+        
         countNow = false;
-        voteResult.text = ("Cube No." + (maxIndex+1) + " is selected!");
     }
 
     private void MymessageReceivedFuntion(object sender, TwitchLib.Client.Events.OnMessageReceivedArgs e)
     {
-        
-
+        noVote = false;
         if (!votedUser.Contains(e.ChatMessage.Username))
         {
             Debug.Log(e.ChatMessage.Username + "just voted");
@@ -91,6 +101,7 @@ public class TwitchClient : MonoBehaviour
         arrayOfVotes[2] = 0;
 
         countNow = true;
+        noVote = true;
 
         ThreeCubes = new GameObject[cubesToChoose];
         for (int x = 0; x < numberOfCube; x++)
