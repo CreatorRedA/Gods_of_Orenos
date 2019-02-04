@@ -51,27 +51,30 @@ public class TwitchClient : MonoBehaviour
     }
 
     private void MymessageReceivedFuntion(object sender, TwitchLib.Client.Events.OnMessageReceivedArgs e)
-    {
-        noVote = false;
-        if (!votedUser.Contains(e.ChatMessage.Username))
+    {   
+        if (!votedUser.Contains(e.ChatMessage.Username))//check if this audience have voted already
         {
-            Debug.Log(e.ChatMessage.Username + "just voted");
-            if (e.ChatMessage.Message.Equals("1"))
+            if (e.ChatMessage.Message.Equals("1"))//check whether the coming message is a vote
             {
-                arrayOfVotes[0]++;
-                Debug.Log("number of votes for cube 1: " + arrayOfVotes[0]);
+                arrayOfVotes[0]++;//plus one to vote count for this cube
+                noVote = false;//tell the script now we have at least one vote
+                votedUser.Add(e.ChatMessage.Username);//add this audience to the list of voted user
+                Debug.Log(e.ChatMessage.Username + "just voted for cube 1." + " Number of votes for cube 1: " + arrayOfVotes[0]);
             }
             else if (e.ChatMessage.Message.Equals("2"))
             {
                 arrayOfVotes[1]++;
-                Debug.Log("number of votes for cube 2: " + arrayOfVotes[1]);
+                noVote = false;
+                votedUser.Add(e.ChatMessage.Username);
+                Debug.Log(e.ChatMessage.Username + "just voted for cube 2." + " Number of votes for cube 1: " + arrayOfVotes[1]);
             }
             else if (e.ChatMessage.Message.Equals("3"))
             {
                 arrayOfVotes[2]++;
-                Debug.Log("number of votes for cube 3: " + arrayOfVotes[2]);
-            }
-            votedUser.Add(e.ChatMessage.Username);
+                noVote = false;
+                votedUser.Add(e.ChatMessage.Username);
+                Debug.Log(e.ChatMessage.Username + "just voted for cube 3." + " Number of votes for cube 1: " + arrayOfVotes[2]);
+            }  
         }
         else
         {

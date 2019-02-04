@@ -73,7 +73,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 224}
   m_MaxSize: {x: 8006, y: 4024}
   vertical: 0
-  controlID: 33
+  controlID: 57
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_MinSize: {x: 681, y: 348}
   m_MaxSize: {x: 12006, y: 8048}
   vertical: 0
-  controlID: 31
+  controlID: 55
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 348}
   m_MaxSize: {x: 8006, y: 8048}
   vertical: 1
-  controlID: 32
+  controlID: 56
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -497,19 +497,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\GoogleDrive\Hampshire College\Div3\Game Design\twitch connection
+  m_LastProjectPath: C:\Users\river\Documents\GitHub\Gods_of_Orenos\twitch connection
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: d8270000
-    m_LastClickedID: 10200
+    m_SelectedIDs: 8e280000
+    m_LastClickedID: 10382
     m_ExpandedIDs: 00000000c627000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -563,8 +563,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 34340000
-    m_LastClickedInstanceID: 13364
+    m_SelectedInstanceIDs: 90220000
+    m_LastClickedInstanceID: 8848
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c623000012400000042c000000000000d02d0000
     m_RenameOverlay:
@@ -650,7 +650,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 04ebffff18ebffff7cedffff88eeffff9ceeffff04f1ffff2af1ffff36f1ffff42f1ffff4ef1ffffb0f2ffffc4f2ffffc6f2ffffecf2ffff00f3ffff64f5ffffb0fbffff442a0000
+      m_ExpandedIDs: a4f6ffffb8f6ffff20f9ffffb0fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 

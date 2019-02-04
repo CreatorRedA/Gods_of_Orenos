@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/Users/river/Desktop/VoteSystem/twitch connection.exe
+C:/Users/river/Desktop/VoteSystem0.1/twitch connection.exe
 SceneListBegin?
 Assets/Scenes/001.unity
 SceneListEnd?
