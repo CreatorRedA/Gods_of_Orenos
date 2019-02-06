@@ -10,8 +10,10 @@ using UnityEngine.UI;
 public class TwitchClient : MonoBehaviour
 {
 
-    public static Client client;
-    public string channel_name = "god_of_orenos_test";
+    public static Client client1;
+    public static Client client2;
+    public string channel_name_1 = "god_of_orenos_test";
+    public string channel_name_2 = "twitch_bot_godsoforenos";
 
     public GameObject[] ThreeCubes;
     public GameObject cubeprefabe;
@@ -50,10 +52,11 @@ public class TwitchClient : MonoBehaviour
         countNow = false;
     }
 
-    private void MymessageReceivedFuntion(object sender, TwitchLib.Client.Events.OnMessageReceivedArgs e)
+    private void Channel_vote(object sender1, TwitchLib.Client.Events.OnMessageReceivedArgs e)
     {   
         if (!votedUser.Contains(e.ChatMessage.Username))//check if this audience have voted already
         {
+            
             if (e.ChatMessage.Message.Equals("1"))//check whether the coming message is a vote
             {
                 arrayOfVotes[0]++;//plus one to vote count for this cube
@@ -75,6 +78,10 @@ public class TwitchClient : MonoBehaviour
                 votedUser.Add(e.ChatMessage.Username);
                 Debug.Log(e.ChatMessage.Username + "just voted for cube 3." + " Number of votes for cube 1: " + arrayOfVotes[2]);
             }  
+            else
+            {
+                Debug.Log(e.ChatMessage.Username + " says " + e.ChatMessage.Message);
+            }
         }
         else
         {
@@ -117,13 +124,17 @@ public class TwitchClient : MonoBehaviour
 
         //set up bot and make it join the channel
         ConnectionCredentials credentials = new ConnectionCredentials("god_of_orenos_bot", Secret.bot_access_token);
-        client = new Client();
-        client.Initialize(credentials, channel_name);
-        client.OnMessageReceived += MymessageReceivedFuntion;
+        client1 = new Client();
+        client1.Initialize(credentials, channel_name_1);
+        client1.OnMessageReceived += Channel_vote;
+        client2 = new Client();
+        client2.Initialize(credentials, channel_name_2);
+        client2.OnMessageReceived += Channel_vote;
 
-        client.Connect();
-        
-
+        client1.Connect();
+        Debug.Log("client 1 connected");
+        client2.Connect();
+        Debug.Log("client 2 connected");
     }
 
     
@@ -131,11 +142,25 @@ public class TwitchClient : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            client.SendMessage(client.JoinedChannels[0], 
+            Debug.Log("message to channel 1 out!");
+            client1.SendMessage(client1.JoinedChannels[0], 
+                "This is a message from the bot. " +
+                "There is no game to play at this moment. " +
+                "God of Orenos is coming soon!");
+            Debug.Log("message to channel 2 out!");
+            client2.SendMessage(client2.JoinedChannels[0],
                 "This is a message from the bot. " +
                 "There is no game to play at this moment. " +
                 "God of Orenos is coming soon!");
         }
+        /*else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Debug.Log("message to channel 2 out!");
+            client2.SendMessage(client2.JoinedChannels[0], 
+                "This is a message from the bot. " +
+                "There is no game to play at this moment. " +
+                "God of Orenos is coming soon!");
+        }*/
     }
 
     void countDown ()

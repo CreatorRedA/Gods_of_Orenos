@@ -25,17 +25,17 @@ public class TwitchAPI : MonoBehaviour
             Debug.Log(ChatterObject.Username);
         }
     }
-    void num2Invoke(Client client)
+    void num2Invoke(Client client1)
     {
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            api.Invoke(api.Undocumented.GetChattersAsync(client.JoinedChannels[0].Channel), GetChatterListCallback);
+            api.Invoke(api.Undocumented.GetChattersAsync(client1.JoinedChannels[0].Channel), GetChatterListCallback);
         }
     }
 
 
     void Update()
     {
-        num2Invoke(TwitchClient.client);
+        num2Invoke(TwitchClient.client1);
     }
 }
