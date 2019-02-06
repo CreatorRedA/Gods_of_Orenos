@@ -11,14 +11,15 @@ public class TwitchClient : MonoBehaviour
 {
 
     public static Client client1;
-    public static Client client2;
     public string channel_name_1 = "god_of_orenos_test";
-    public string channel_name_2 = "twitch_bot_godsoforenos";
 
     public GameObject[] ThreeCubes;
     public GameObject cubeprefabe;
     public Text countDownTimer;
     public Text voteResult;
+    public Text Cube1VoteCount;
+    public Text Cube2VoteCount;
+    public Text Cube3VoteCount;
     Vector2 cubePos;
     int[] arrayOfVotes = new int[3];
     float timer;
@@ -62,6 +63,7 @@ public class TwitchClient : MonoBehaviour
                 arrayOfVotes[0]++;//plus one to vote count for this cube
                 noVote = false;//tell the script now we have at least one vote
                 votedUser.Add(e.ChatMessage.Username);//add this audience to the list of voted user
+                Cube1VoteCount.text = "Cube 1 total vote: " + arrayOfVotes[0];
                 Debug.Log(e.ChatMessage.Username + "just voted for cube 1." + " Number of votes for cube 1: " + arrayOfVotes[0]);
             }
             else if (e.ChatMessage.Message.Equals("2"))
@@ -69,6 +71,7 @@ public class TwitchClient : MonoBehaviour
                 arrayOfVotes[1]++;
                 noVote = false;
                 votedUser.Add(e.ChatMessage.Username);
+                Cube2VoteCount.text = "Cube 2 total vote: " + arrayOfVotes[1];
                 Debug.Log(e.ChatMessage.Username + "just voted for cube 2." + " Number of votes for cube 2: " + arrayOfVotes[1]);
             }
             else if (e.ChatMessage.Message.Equals("3"))
@@ -76,6 +79,7 @@ public class TwitchClient : MonoBehaviour
                 arrayOfVotes[2]++;
                 noVote = false;
                 votedUser.Add(e.ChatMessage.Username);
+                Cube3VoteCount.text = "Cube 3 total vote: " + arrayOfVotes[2];
                 Debug.Log(e.ChatMessage.Username + "just voted for cube 3." + " Number of votes for cube 3: " + arrayOfVotes[2]);
             }  
             else
@@ -116,7 +120,7 @@ public class TwitchClient : MonoBehaviour
         ThreeCubes = new GameObject[cubesToChoose];
         for (int x = 0; x < numberOfCube; x++)
         {
-            cubePos = new Vector2(x * 2, 0);
+            cubePos = new Vector2(x * 2, -3);
             ThreeCubes[x] = Instantiate(cubeprefabe, cubePos, Quaternion.identity);
         }
         //ensure this is running in background
@@ -127,14 +131,9 @@ public class TwitchClient : MonoBehaviour
         client1 = new Client();
         client1.Initialize(credentials, channel_name_1);
         client1.OnMessageReceived += Channel_vote;
-        client2 = new Client();
-        client2.Initialize(credentials, channel_name_2);
-        client2.OnMessageReceived += Channel_vote;
 
         client1.Connect();
         Debug.Log("client 1 connected");
-        client2.Connect();
-        Debug.Log("client 2 connected");
     }
 
     
@@ -147,21 +146,7 @@ public class TwitchClient : MonoBehaviour
                 "This is a message from the bot. " +
                 "There is no game to play at this moment. " +
                 "God of Orenos is coming soon!");
-
-            Debug.Log("message to channel 2 out!");
-            client2.SendMessage(client2.JoinedChannels[0],
-                "This is a message from the bot. " +
-                "There is no game to play at this moment. " +
-                "God of Orenos is coming soon!");
         }
-        /*else if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Debug.Log("message to channel 2 out!");
-            client2.SendMessage(client2.JoinedChannels[0], 
-                "This is a message from the bot. " +
-                "There is no game to play at this moment. " +
-                "God of Orenos is coming soon!");
-        }*/
     }
 
     void countDown ()
