@@ -52,7 +52,7 @@ public class TwitchClient : MonoBehaviour
         countNow = false;
     }
 
-    private void Channel_vote(object sender1, TwitchLib.Client.Events.OnMessageReceivedArgs e)
+    private void Channel_vote(object sender, TwitchLib.Client.Events.OnMessageReceivedArgs e)
     {   
         if (!votedUser.Contains(e.ChatMessage.Username))//check if this audience have voted already
         {
@@ -69,18 +69,18 @@ public class TwitchClient : MonoBehaviour
                 arrayOfVotes[1]++;
                 noVote = false;
                 votedUser.Add(e.ChatMessage.Username);
-                Debug.Log(e.ChatMessage.Username + "just voted for cube 2." + " Number of votes for cube 1: " + arrayOfVotes[1]);
+                Debug.Log(e.ChatMessage.Username + "just voted for cube 2." + " Number of votes for cube 2: " + arrayOfVotes[1]);
             }
             else if (e.ChatMessage.Message.Equals("3"))
             {
                 arrayOfVotes[2]++;
                 noVote = false;
                 votedUser.Add(e.ChatMessage.Username);
-                Debug.Log(e.ChatMessage.Username + "just voted for cube 3." + " Number of votes for cube 1: " + arrayOfVotes[2]);
+                Debug.Log(e.ChatMessage.Username + "just voted for cube 3." + " Number of votes for cube 3: " + arrayOfVotes[2]);
             }  
             else
             {
-                Debug.Log(e.ChatMessage.Username + " says " + e.ChatMessage.Message);
+                Debug.Log(e.ChatMessage.Username + " from " + e.ChatMessage.Channel + " says " + e.ChatMessage.Message);
             }
         }
         else
@@ -147,6 +147,7 @@ public class TwitchClient : MonoBehaviour
                 "This is a message from the bot. " +
                 "There is no game to play at this moment. " +
                 "God of Orenos is coming soon!");
+
             Debug.Log("message to channel 2 out!");
             client2.SendMessage(client2.JoinedChannels[0],
                 "This is a message from the bot. " +
