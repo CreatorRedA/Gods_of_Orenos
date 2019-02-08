@@ -142,8 +142,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mana: 0
-  CardPrefab: {fileID: 925843506124050236, guid: 43bd9bca3c5a51140888431876cf4997,
+  wizard: {fileID: 0}
+  CardPrefab: {fileID: 875970058597344648, guid: 52a97ae4771d3e1489715eaa819178d8,
     type: 3}
+  Hand: []
+  DrawDeck: []
+  DiscardDeck: []
+  MarketCard: []
 --- !u!4 &129518889
 Transform:
   m_ObjectHideFlags: 0
@@ -276,8 +281,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.024963379, y: 0}
-  m_SizeDelta: {x: 0.1, y: 141.2}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 141.2}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1407816366
 MonoBehaviour:

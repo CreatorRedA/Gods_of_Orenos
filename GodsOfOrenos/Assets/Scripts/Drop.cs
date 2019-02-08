@@ -7,7 +7,6 @@ public class Drop : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerE
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        //Debug.Log("OnPointerEnter");
         if (eventData.pointerDrag == null)
             return;
 
@@ -20,7 +19,6 @@ public class Drop : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerE
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        //Debug.Log("OnPointerExit");
         if (eventData.pointerDrag == null)
             return;
 

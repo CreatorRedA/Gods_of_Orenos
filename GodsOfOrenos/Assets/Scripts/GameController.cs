@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public int Mana = 0;
+    public Card wizard;
     public GameObject CardPrefab;
     public List<GameObject> Hand;
     public List<GameObject> DrawDeck;
@@ -18,11 +19,13 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CardPrefab.GetComponent<CardScript>().card = wizard;
         cardEffects = GameObject.Find("CardEffects").GetComponent<CardEffects>();
         for (int x = 0; x<5; x++)
         {
             CardPos = new Vector2(x*200, -100);
             Hand.Add(Instantiate(CardPrefab, CardPos, Quaternion.identity, GameObject.FindGameObjectWithTag("canvas").transform));
+            Debug.Log(Hand.Count);
         }
     }
 
@@ -32,10 +35,6 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             Debug.Log(Mana);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            cardEffects.addMana(3);
         }
     }
 }
