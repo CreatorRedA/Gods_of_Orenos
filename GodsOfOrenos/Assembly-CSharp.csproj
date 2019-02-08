@@ -60,11 +60,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Cards\CreatureCards.cs" />
-    <Compile Include="Assets\Cards\ItemCards.cs" />
-    <Compile Include="Assets\Cards\SpellCards.cs" />
+    <Compile Include="Assets\Scripts\CardEffect.cs" />
     <Compile Include="Assets\Scripts\Draggable.cs" />
     <Compile Include="Assets\Scripts\DropZone.cs" />
+    <Compile Include="Assets\Scripts\GameController.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/river/Documents/GitHub/Gods_of_Orenos/GodsOfOrenos/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
