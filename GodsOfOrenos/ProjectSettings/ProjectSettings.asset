@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 15
-  productGUID: 079c87f8376864c37b0f8c785d394a49
+  productGUID: ea3d20e314f92ef45b57f1e4b1da09b2
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: Gods_Of_Orenos
+  productName: GodsOfOrenos
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -580,10 +580,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: dc499c2e-f9cd-4cbe-9cb0-a464ca2f71c0
+  cloudProjectId: 107804f6-1022-4dcd-bb32-f26685c43af2
   framebufferDepthMemorylessMode: 0
-  projectName: Gods_Of_Orenos
-  organizationId: nybrinton
+  projectName: GodsOfOrenos
+  organizationId: ukoidyost
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
