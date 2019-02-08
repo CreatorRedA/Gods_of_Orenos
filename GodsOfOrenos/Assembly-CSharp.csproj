@@ -60,18 +60,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\CardEffects.cs" />
-    <Compile Include="Assets\Scripts\DeckControl.cs" />
     <Compile Include="Assets\Scripts\Draggable.cs" />
-    <Compile Include="Assets\Scripts\DrawButton.cs" />
-    <Compile Include="Assets\Scripts\Drop.cs" />
-    <Compile Include="Assets\Scripts\GameController.cs" />
-    <Compile Include="Assets\Scripts\menuNav.cs" />
-    <Compile Include="Assets\Scripts\Test.cs" />
-    <Compile Include="Assets\Scripts\TuneVariables.cs" />
-    <Compile Include="Assets\Secret.cs" />
-    <Compile Include="Assets\TwitchAPI.cs" />
-    <Compile Include="Assets\TwitchClient.cs" />
+    <Compile Include="Assets\Scripts\DropZone.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/river/Documents/GitHub/Gods_of_Orenos/GodsOfOrenos/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -290,9 +280,6 @@
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="TwitchLib.Unity">
-      <HintPath>C:/Users/river/Documents/GitHub/Gods_of_Orenos/GodsOfOrenos/Assets/Plugins/TwitchLib.Unity.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>C:/Users/river/Documents/GitHub/Gods_of_Orenos/GodsOfOrenos/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
