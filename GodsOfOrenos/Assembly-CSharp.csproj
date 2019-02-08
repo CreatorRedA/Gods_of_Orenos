@@ -60,6 +60,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Cards\CreatureCards.cs" />
+    <Compile Include="Assets\Cards\ItemCards.cs" />
+    <Compile Include="Assets\Cards\SpellCards.cs" />
     <Compile Include="Assets\Scripts\Draggable.cs" />
     <Compile Include="Assets\Scripts\DropZone.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
