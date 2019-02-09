@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class CardEffect : MonoBehaviour
 {
-
     GameController gameController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,28 +41,64 @@ public class CardEffect : MonoBehaviour
 
     public void discard_type_of_card(GameObject clickedCard, string type)
     {
-
+        /*if (clickedCard.GetComponent<CardScript>().type = type)
+        {
+            discard(clickedCard);
+        }*/
     }
 
     public void discard(GameObject clickedCard)
     {
-
+        int cardNumber = GameController.Hand.IndexOf(clickedCard);
+        GameController.DiscardPile.Add(GameController.Hand[cardNumber]);
+        GameController.Hand.RemoveAt(cardNumber);
     }
 
     public void move_card_from_deck_to_discard(GameObject clickedCard)
     {
-
+        int cardNumber = GameController.DrawDeck.IndexOf(clickedCard);
+        GameController.DiscardPile.Add(GameController.DrawDeck[cardNumber]);
+        GameController.DrawDeck.RemoveAt(cardNumber);
     }
 
     public void move_card_from_discard_to_hand(GameObject clickedCard)
     {
-
+        int cardNumber = GameController.DiscardPile.IndexOf(clickedCard);
+        GameController.Hand.Add(GameController.DiscardPile[cardNumber]);
+        GameController.DiscardPile.RemoveAt(cardNumber);
     }
 
     //four methods below work together
-    public void pick_from_nextHand(int x,GameObject clickedCard)
+    public void pick_from_nextHand(int look, int pick, GameObject clickedCard)
     {
+        //do something to bring up value of look cards onto screen
+        int picked = 0;
+        List<GameObject> CardToLook = new List<GameObject>();
+        
+        for (int x = 0; x < look; x++)
+        {
+            int cardFromDraw = Random.Range(0, GameController.DrawDeck.Count);
+            CardToLook[x] = GameController.NextHand[x];
+            GameController.NextHand.RemoveAt(x);
+            GameController.NextHand.Add(GameController.DrawDeck[cardFromDraw]);
+            GameController.DrawDeck.RemoveAt(cardFromDraw);
+        }
 
+
+        if (picked < pick)
+        {
+            int cardNumber = GameController.NextHand.IndexOf(clickedCard);
+            GameController.Hand.Add(GameController.NextHand[cardNumber]);
+            GameController.NextHand.RemoveAt(cardNumber);
+            picked++;
+        }
+        else
+        {
+            for (int x = 0; x < CardToLook.Count; x++)
+            {
+                //do one of three things below;
+            }
+        }
     }
 
     //one of three methods below happen after pick_from_nextHand happen
@@ -71,12 +107,12 @@ public class CardEffect : MonoBehaviour
 
     }
 
-    public void then_go_back_in_random_order(GameObject clickedCard)
+    public void then_go_back_in_random_order(GameObject Card)
     {
 
     }
 
-    public void then_go_to_discard()
+    public void then_go_to_discard(GameObject Card)
     {
 
     }

@@ -4,9 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - canvas
   - Hand
   - CardsInPlay
+  - AllCard
+  - CardEffect
+  - GameControl
   layers:
   - Default
   - TransparentFX
