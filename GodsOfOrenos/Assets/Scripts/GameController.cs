@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     public static List<GameObject> DiscardPile;
     public static List<GameObject> Hand;
     public static List<GameObject> NextHand;
+    public static List<GameObject> ItemInUse;
 
     //quest indicator
     public static bool quest1done;
@@ -81,11 +82,11 @@ public class GameController : MonoBehaviour
         for (int x = 0; x < 5; x++)
         {
             int cardNumber = Random.Range(0, DrawDeck.Count);
-            Instantiate(DrawDeck[cardNumber], new Vector2(0, 0), Quaternion.identity,
-                GameObject.FindGameObjectWithTag("Hand").transform);
+            Hand.Add(Instantiate(DrawDeck[cardNumber], new Vector2(0, 0), Quaternion.identity, 
+                GameObject.FindGameObjectWithTag("Hand").transform));
+            
             DrawDeck.RemoveAt(cardNumber);
         }
-        Debug.Log("Number of cards in deck: " + DrawDeck.Count);
     }
 
     // Update is called once per frame

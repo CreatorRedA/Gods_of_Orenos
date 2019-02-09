@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class CardEffect : MonoBehaviour
 {
     GameController gameController;
@@ -68,69 +69,105 @@ public class CardEffect : MonoBehaviour
         GameController.DiscardPile.RemoveAt(cardNumber);
     }
 
-    //four methods below work together
-    public void pick_from_nextHand(int look, int pick, GameObject clickedCard)
+
+    public void pick_from_nextHand(int numberOfCardsToLook, int numberOfCardsToPick, 
+        GameObject clickedCard, GameObject Card, string AndThen)
     {
-        //do something to bring up value of look cards onto screen
-        int picked = 0;
+
+        int numberOfCardsPicked = 0;
         List<GameObject> CardToLook = new List<GameObject>();
         
-        for (int x = 0; x < look; x++)
+        //bring cards from next hand to screen
+        for (int x = 0; x < numberOfCardsToLook; x++)
         {
-            int cardFromDraw = Random.Range(0, GameController.DrawDeck.Count);
             CardToLook[x] = GameController.NextHand[x];
             GameController.NextHand.RemoveAt(x);
+            int cardFromDraw = Random.Range(0, GameController.DrawDeck.Count);
             GameController.NextHand.Add(GameController.DrawDeck[cardFromDraw]);
             GameController.DrawDeck.RemoveAt(cardFromDraw);
         }
 
+        //do something to bring cards to look onto screen
 
-        if (picked < pick)
+        //when clicked
+        int indexOfCardSentBack = 0;
+        int numberOfCardLeft = 0;
+
+        if (numberOfCardsPicked < numberOfCardsToPick)
         {
-            int cardNumber = GameController.NextHand.IndexOf(clickedCard);
+            int cardNumber = CardToLook.IndexOf(clickedCard);
             GameController.Hand.Add(GameController.NextHand[cardNumber]);
-            GameController.NextHand.RemoveAt(cardNumber);
-            picked++;
+            CardToLook.RemoveAt(cardNumber);
+            numberOfCardsPicked++;
         }
+
         else
         {
-            for (int x = 0; x < CardToLook.Count; x++)
+            numberOfCardLeft = numberOfCardsToPick - numberOfCardsPicked;
+            if (AndThen == "go back in order")
             {
-                //do one of three things below;
+                if (indexOfCardSentBack < numberOfCardLeft)
+                {
+                    int indexOfClickedCard = CardToLook.IndexOf(clickedCard);
+                    GameController.NextHand.Insert(indexOfCardSentBack, clickedCard);
+                    GameController.NextHand.RemoveAt(GameController.NextHand.Count - 1);
+                    indexOfCardSentBack++;
+                    CardToLook.RemoveAt(indexOfClickedCard);
+                }
             }
+
+            else if (AndThen == "go back in random order")
+            {
+                for (int x = 0; x < numberOfCardLeft; x++)
+                {
+                    GameController.NextHand.RemoveAt(GameController.NextHand.Count - 1);
+                }
+                for(int x = 0; x < numberOfCardLeft; x++)
+                {
+                    GameController.NextHand.Add(CardToLook[x]);
+                }
+
+                for (int x = 0; x < GameController.NextHand.Count; x++)
+                {
+                    GameObject tmp = GameController.NextHand[x];
+                    int randomIndex = Random.Range(x, GameController.NextHand.Count);
+                    GameController.NextHand[x] = GameController.NextHand[randomIndex];
+                    GameController.NextHand[randomIndex] = tmp;
+                }
+            }
+
+            else if (AndThen == "go to discard")
+            {
+                for (int x = 0; x < numberOfCardLeft; x++)
+                {
+                    GameController.DiscardPile.Add(CardToLook[x]);
+                }
+                CardToLook.Clear();
+            }
+            
         }
     }
 
-    //one of three methods below happen after pick_from_nextHand happen
-    public void then_go_back_in_certain_order(GameObject clickedCard)
-    {
 
+    public void add_item_to_board(GameObject clickedCard)
+    {
+        int indexOfClickdCard = GameController.Hand.IndexOf(clickedCard);
+        GameController.ItemInUse.Add(GameController.Hand[indexOfClickdCard]);
+        GameController.Hand.RemoveAt(indexOfClickdCard);
     }
 
-    public void then_go_back_in_random_order(GameObject Card)
+    public void destroy_item(GameObject clickedCard)
     {
-
+        int indexOfClickdCard = GameController.ItemInUse.IndexOf(clickedCard);
+        GameController.DiscardPile.Add(GameController.ItemInUse[indexOfClickdCard]);
+        GameController.ItemInUse.RemoveAt(indexOfClickdCard);
     }
 
-    public void then_go_to_discard(GameObject Card)
+    public void move_item_to_hand(GameObject clickedCard)
     {
-
-    }
-    //four methods above work together
-
-    public void add_item_to_board(GameObject Card)
-    {
-
-    }
-
-    public void destroy_item(GameObject Card)
-    {
-
-    }
-
-    public void move_item_to_hand(GameObject Card)
-    {
-
+        int indexOfClickdCard = GameController.ItemInUse.IndexOf(clickedCard);
+        GameController.Hand.Add(GameController.Hand[indexOfClickdCard]);
+        GameController.ItemInUse.RemoveAt(indexOfClickdCard);
     }
 
     public void complete_quest(GameObject clickedQuest)
@@ -138,9 +175,11 @@ public class CardEffect : MonoBehaviour
 
     }
 
-    public void get_card_from_market_to_hand(GameObject Card)
+    public void get_card_from_market_to_hand(GameObject clickedCard)
     {
-
+        int indexOfClickdCard = GameController.MarketCards.IndexOf(clickedCard);
+        GameController.Hand.Add(GameController.MarketCards[indexOfClickdCard]);
+        GameController.MarketCards.RemoveAt(indexOfClickdCard);
     }
 
     public void remove_curse(GameObject clickedCurse)
