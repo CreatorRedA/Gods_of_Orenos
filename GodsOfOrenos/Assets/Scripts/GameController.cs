@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour
 {
     CardEffect cardEffect;
     GameObject clickedCard;
+    public GameObject HandPanel;
+
 
     //card list
     public static List<GameObject> MarketCards;
@@ -24,6 +26,7 @@ public class GameController : MonoBehaviour
     public static bool quest5done;
 
     //loading card prefabs
+    
     public GameObject aegisOfOrenos;
     public GameObject angelicIntervention;
     public GameObject aromoredMammoth;
@@ -79,14 +82,15 @@ public class GameController : MonoBehaviour
         initializeMarketCard();
         Debug.Log("Number of cards in market: " + MarketCards.Count);
 
-        for (int x = 0; x < 5; x++)
-        {
-            int cardNumber = Random.Range(0, DrawDeck.Count);
-            Hand.Add(Instantiate(DrawDeck[cardNumber], new Vector2(0, 0), Quaternion.identity, 
-                GameObject.FindGameObjectWithTag("Hand").transform));
-            
-            DrawDeck.RemoveAt(cardNumber);
-        }
+        DrawDeck.AddRange(MarketCards);
+
+        DrawNextHand(5);
+
+        DrawToHand(5);
+
+
+
+
     }
 
     // Update is called once per frame
@@ -137,15 +141,6 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void DrawToHand(int x)
-    {
-        for (int y = 0; y < x; y++)
-        {
-            int cardNumber = Random.Range(0, DrawDeck.Count);
-            Hand.Add(DrawDeck[cardNumber]);
-            DrawDeck.RemoveAt(cardNumber);
-        }
-    }
 
     void DrawNextHand(int x)
     {
@@ -155,5 +150,57 @@ public class GameController : MonoBehaviour
             NextHand.Add(DrawDeck[cardNumber]);
             DrawDeck.RemoveAt(cardNumber);
         }
+        Debug.Log("cards in next hand: " + NextHand.Count);
+    }
+
+
+    void DrawToHand(int x)
+    {
+        for (int y = 0; y < x; y++)
+        {
+            Hand.Add(NextHand[y]);  
+        }
+        Debug.Log("cards in hand: " + Hand.Count);
+
+        for (int y = 0; y < x; y++)
+        {
+            NextHand.RemoveAt(0);
+        }
+        Debug.Log("cards in next hand: " + NextHand.Count);
+
+        if (NextHand.Count < 5)
+        {
+            int diff = 5 - NextHand.Count;
+            for (int y = 0; y < diff; y++)
+            {
+                int cardNumber = Random.Range(0, DrawDeck.Count);
+                NextHand.Add(DrawDeck[cardNumber]);
+                DrawDeck.RemoveAt(cardNumber);
+            }
+        }
+    }
+
+
+    public static void DrawCard()
+    {
+        for (int x = 0; x < Hand.Count; x++)
+        {
+            Instantiate(Hand[x], new Vector2(0, 0), Quaternion.identity, GameObject.FindGameObjectWithTag("Hand").transform);
+        }
+        Debug.Log("cards in hand: " + Hand.Count);
+    }
+
+    public static void Discard()
+    {
+        GameController gameController;
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        int size = Hand.Count;
+        for (int x = 0; x < size; x++)
+        {
+            DiscardPile.Add(Hand[x]);
+            Destroy(gameController.HandPanel.transform.GetChild(x).gameObject);
+        }
+        Hand.Clear();
+        Debug.Log("cards in hand: " + Hand.Count);
     }
 }

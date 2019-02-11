@@ -61,7 +61,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CardEffect.cs" />
+    <Compile Include="Assets\Scripts\DiscardButton.cs" />
     <Compile Include="Assets\Scripts\Draggable.cs" />
+    <Compile Include="Assets\Scripts\DrawButton.cs" />
     <Compile Include="Assets\Scripts\DropZone.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
