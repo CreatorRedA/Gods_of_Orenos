@@ -82,7 +82,7 @@ public class GameController : MonoBehaviour
         initializeMarketCard();
         Debug.Log("Number of cards in market: " + MarketCards.Count);
 
-        DrawDeck.AddRange(MarketCards);
+        //DrawDeck.AddRange(MarketCards);
 
         DrawNextHand(5);
 
@@ -180,6 +180,7 @@ public class GameController : MonoBehaviour
         }
     }
 
+    
 
     public static void DrawCard()
     {

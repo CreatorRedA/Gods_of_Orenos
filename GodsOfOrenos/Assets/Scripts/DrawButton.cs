@@ -6,10 +6,11 @@ public class DrawButton : MonoBehaviour
 {
     // Start is called before the first frame update
 
-
+    GameObject cardsInPlayPanel;
     public void click()
     {
         GameController.DrawCard();
     }
+
 }
 
