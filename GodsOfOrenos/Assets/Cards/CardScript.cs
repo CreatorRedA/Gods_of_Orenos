@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class CardScript : MonoBehaviour
 {
-    GameObject cardsInPlayPanel;
+    public string type;
+    public int cost;
+
+    public GameObject cardsInPlayPanel;
     // Start is called before the first frame update
     void Start()
     {
