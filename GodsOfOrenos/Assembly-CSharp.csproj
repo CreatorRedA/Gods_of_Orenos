@@ -60,7 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Cards\CardScript.cs" />
+    <Compile Include="Assets\Cards\Wizard.cs" />
     <Compile Include="Assets\Scripts\CardEffect.cs" />
     <Compile Include="Assets\Scripts\DiscardButton.cs" />
     <Compile Include="Assets\Scripts\Draggable.cs" />

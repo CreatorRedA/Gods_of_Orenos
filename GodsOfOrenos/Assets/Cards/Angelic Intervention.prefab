@@ -360,7 +360,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ' Draw 3 cards'
+  m_Text: ' Draw 3 cards and you may destroy any number of items'
 --- !u!1 &2193554166880774415
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +439,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 7
+  m_Text: 9
 --- !u!1 &2632837627761287386
 GameObject:
   m_ObjectHideFlags: 0

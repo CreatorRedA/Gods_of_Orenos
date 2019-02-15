@@ -42,10 +42,10 @@ public class CardEffect : MonoBehaviour
 
     public void discard_type_of_card(GameObject clickedCard, string type)
     {
-        /*if (clickedCard.GetComponent<CardScript>().type = type)
+        if (clickedCard.GetComponent<Wizard>().type == type)
         {
             discard(clickedCard);
-        }*/
+        }
     }
 
     public void discard(GameObject clickedCard)
@@ -200,7 +200,7 @@ public class CardEffect : MonoBehaviour
         int count = 0;
         for (int x = 0; x < GameController.Hand.Count; x ++)
         {
-            if (GameController.Hand[x].GetComponent<CardScript>().type == inputType)
+            if (GameController.Hand[x].GetComponent<Wizard>().type == inputType)
             {
                 count++;
             }
@@ -213,7 +213,7 @@ public class CardEffect : MonoBehaviour
         int count = 0;
         for (int x = 0; x < GameController.DiscardPile.Count; x++)
         {
-            if (GameController.DiscardPile[x].GetComponent<CardScript>().type == inputType)
+            if (GameController.DiscardPile[x].GetComponent<Wizard>().type == inputType)
             {
                 count++;
             }
@@ -233,7 +233,7 @@ public class CardEffect : MonoBehaviour
 
     public int counting_card_cost(GameObject clickedCard)
     {
-        return clickedCard.GetComponent<CardScript>().cost;
+        return clickedCard.GetComponent<Wizard>().cost;
     }
 
     public bool complete_a_quest(GameObject clickedQuest)
