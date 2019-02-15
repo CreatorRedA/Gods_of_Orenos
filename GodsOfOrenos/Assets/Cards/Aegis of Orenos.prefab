@@ -97,6 +97,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentToReturnTo: {fileID: 0}
   placeholderParent: {fileID: 0}
+  isMarketCard: 1
+  costForMarketCard: 1
 --- !u!114 &11499534
 MonoBehaviour:
   m_ObjectHideFlags: 0

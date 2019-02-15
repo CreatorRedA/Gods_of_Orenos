@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +18,7 @@ public class CardEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public bool block_effect()
@@ -42,10 +43,10 @@ public class CardEffect : MonoBehaviour
 
     public void discard_type_of_card(GameObject clickedCard, string type)
     {
-        if (clickedCard.GetComponent<Wizard>().type == type)
+        /*if (clickedCard.GetComponent<CardScript>().type = type)
         {
             discard(clickedCard);
-        }
+        }*/
     }
 
     public void discard(GameObject clickedCard)
@@ -70,13 +71,13 @@ public class CardEffect : MonoBehaviour
     }
 
 
-    public void pick_from_nextHand(int numberOfCardsToLook, int numberOfCardsToPick, 
+    public void pick_from_nextHand(int numberOfCardsToLook, int numberOfCardsToPick,
         GameObject clickedCard, GameObject Card, string AndThen)
     {
 
         int numberOfCardsPicked = 0;
         List<GameObject> CardToLook = new List<GameObject>();
-        
+
         //bring cards from next hand to screen
         for (int x = 0; x < numberOfCardsToLook; x++)
         {
@@ -122,7 +123,7 @@ public class CardEffect : MonoBehaviour
                 {
                     GameController.NextHand.RemoveAt(GameController.NextHand.Count - 1);
                 }
-                for(int x = 0; x < numberOfCardLeft; x++)
+                for (int x = 0; x < numberOfCardLeft; x++)
                 {
                     GameController.NextHand.Add(CardToLook[x]);
                 }
@@ -144,7 +145,7 @@ public class CardEffect : MonoBehaviour
                 }
                 CardToLook.Clear();
             }
-            
+
         }
     }
 
@@ -184,7 +185,7 @@ public class CardEffect : MonoBehaviour
 
     public void remove_curse(GameObject clickedCurse)
     {
-        
+
     }
 
     //methods above are effects
@@ -198,9 +199,9 @@ public class CardEffect : MonoBehaviour
     public int counting_type_of_cards_in_hand(string inputType)
     {
         int count = 0;
-        for (int x = 0; x < GameController.Hand.Count; x ++)
+        for (int x = 0; x < GameController.Hand.Count; x++)
         {
-            if (GameController.Hand[x].GetComponent<Wizard>().type == inputType)
+            //if (GameController.Hand[x].GetComponent<CardScript>().type == inputType)
             {
                 count++;
             }
@@ -213,7 +214,7 @@ public class CardEffect : MonoBehaviour
         int count = 0;
         for (int x = 0; x < GameController.DiscardPile.Count; x++)
         {
-            if (GameController.DiscardPile[x].GetComponent<Wizard>().type == inputType)
+            //if (GameController.DiscardPile[x].GetComponent<CardScript>().type == inputType)
             {
                 count++;
             }
@@ -231,9 +232,9 @@ public class CardEffect : MonoBehaviour
         return 0;
     }
 
-    public int counting_card_cost(GameObject clickedCard)
+    public void counting_card_cost(GameObject clickedCard)
     {
-        return clickedCard.GetComponent<Wizard>().cost;
+        //return clickedCard.GetComponent<CardScript>().cost;
     }
 
     public bool complete_a_quest(GameObject clickedQuest)
@@ -262,7 +263,7 @@ public class CardEffect : MonoBehaviour
 
     public void curse2(GameObject clickedCard)
     {
-        //Curse of inane	Discard 1 card at the start of the turn.
+        //Curse of inane    Discard 1 card at the start of the turn.
         CardEffect cardEffect;
         cardEffect = GameObject.Find("CardEffect").GetComponent<CardEffect>();
         bool turnStart = true;
@@ -275,12 +276,12 @@ public class CardEffect : MonoBehaviour
 
     public void curse3()
     {
-        //Curse of Somnus	The first 3 mana added to your pool in a turn is not added.
+        //Curse of Somnus   The first 3 mana added to your pool in a turn is not added.
         int effectCountDown = 3;
         int tmpMana = GameController.mana;
         int diff = GameController.mana - tmpMana;
 
-        if (effectCountDown >0)
+        if (effectCountDown > 0)
         {
             if (GameController.mana > tmpMana && diff >= effectCountDown)
             {
@@ -299,13 +300,13 @@ public class CardEffect : MonoBehaviour
 
     public void curse4()
     {
-        //Curse of Malum	The player cannot look at cards in their deck.
+        //Curse of Malum    The player cannot look at cards in their deck.
         //turn the bool var for look at top cards to false
     }
 
     public void curse5()
     {
-        //Curse of Plaga	You may only buy a maximum of 1 card this round
+        //Curse of Plaga    You may only buy a maximum of 1 card this round
         bool accessToMarket = true;
         //after buying a card
         if (accessToMarket == true)
@@ -316,7 +317,7 @@ public class CardEffect : MonoBehaviour
 
     public void curse6()
     {
-        //Curse of the Magician.	You can't play more than 9 cards
+        //Curse of the Magician.    You can't play more than 9 cards
         int cardCount = 0;
         //when play card, cardCount++
         if (cardCount > 9)
@@ -330,8 +331,8 @@ public class CardEffect : MonoBehaviour
 
     public void quest1()
     {
-        //Gorena, Goddess of Power	
-        //The quest is completed if you have 20 or more mana during your turn.	
+        //Gorena, Goddess of Power  
+        //The quest is completed if you have 20 or more mana during your turn.  
         //Put 2 cards from the market into your discard.
 
         if (GameController.mana > 20)
@@ -352,7 +353,7 @@ public class CardEffect : MonoBehaviour
             GameController.quest2done = true;
             GameController.numberOfQuestCompleted++;
         }
-        
+
     }
 
     public void quest3()
@@ -396,3 +397,4 @@ public class CardEffect : MonoBehaviour
         }
     }
 }
+
