@@ -41,7 +41,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
         tableTop = GameObject.FindGameObjectWithTag("TableTop").transform;
         market = GameObject.FindGameObjectWithTag("Market").transform;
         hand = GameObject.FindGameObjectWithTag("Hand").transform;
-        discard = GameObject.FindGameObjectWithTag("Discard").transform;
+        discard = gameController.discardScrollPanelContent.transform;
     }
 
 
