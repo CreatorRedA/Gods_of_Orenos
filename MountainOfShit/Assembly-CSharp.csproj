@@ -60,7 +60,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Cards\Card\CardScript.cs" />
+    <Compile Include="Assets\Cards\Card\Card.cs" />
+    <Compile Include="Assets\Cards\Card\ChildClasses\Wizard.cs" />
+    <Compile Include="Assets\Cards\Card\QuestCard.cs" />
     <Compile Include="Assets\Scripts\CardEffect.cs" />
     <Compile Include="Assets\Scripts\Draggable.cs" />
     <Compile Include="Assets\Scripts\DropZone.cs" />

@@ -20,6 +20,14 @@ public class GameController : MonoBehaviour
     public static bool quest4done;
     public static bool quest5done;
 
+    //panels
+    public GameObject handPanel;
+    public GameObject manaPanel;
+    public GameObject marketPanel;
+
+    //mana image
+    public Image manaIcon;
+
     //curse indicator
     public static bool curse1;
     public static bool curse2;
@@ -72,19 +80,30 @@ public class GameController : MonoBehaviour
 
 
 
-    void Start()
+    public void Start()
     {
         MarketCards = new List<GameObject>();
         DrawDeck = new List<GameObject>();
         DiscardPile = new List<GameObject>();
         Hand = new List<GameObject>();
         ItemInUse = new List<GameObject>();
-
+        for(int x = 0; x < 5; x++)
+        {
+            GameObject wizardObj = Instantiate(wizard);
+            wizardObj.transform.SetParent(handPanel.transform);
+        }
         mana = 0;
         manaNextTurn = 0;
         numberOfQuestCompleted = 0;
         turns = 0;
         cardDrawed = 5;
+
+        initializeMarketCard();
+        foreach(GameObject go in MarketCards)
+        {
+            GameObject marketObj = Instantiate(go);
+            marketObj.transform.SetParent(marketPanel.transform);
+        }
 
     }
 
@@ -96,6 +115,15 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void addOneMana(int manaAdd)
+    {
+        mana += manaAdd;
+        Image manaObj = Instantiate(manaIcon);
+        for (int i = 0; i < manaAdd; i++)
+        {
+            manaObj.transform.SetParent(manaPanel.transform);
+        }
+    }
     void initializeDrawDeck()
     {
         for (int x = 0; x < 10; x++)
@@ -166,20 +194,20 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void buyCard (GameObject clickedCard)
-    {
-        int cost = clickedCard.GetComponent<CardScript>().manaCost;
-        int CardIndex = MarketCards.IndexOf(clickedCard);
-        if (mana >= cost)
-        {
-            mana -= cost;
-            DrawDeck.Add(MarketCards[CardIndex]);
-            MarketCards.RemoveAt(CardIndex);
-        }
-        else
-        {
-            Debug.Log("No engough mana");
-        }
+    //public void buyCard (GameObject clickedCard)
+    //{
+    //    int cost = clickedCard.GetComponent<CardScript>().manaCost;
+    //    int CardIndex = MarketCards.IndexOf(clickedCard);
+    //    if (mana >= cost)
+    //    {
+    //        mana -= cost;
+    //        DrawDeck.Add(MarketCards[CardIndex]);
+    //        MarketCards.RemoveAt(CardIndex);
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("No engough mana");
+    //    }
 
-    }
+    //}
 }

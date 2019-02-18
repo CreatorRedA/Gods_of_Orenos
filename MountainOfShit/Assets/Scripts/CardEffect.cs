@@ -23,10 +23,6 @@ public class CardEffect : MonoBehaviour
         return false;
     }
 
-    public void addMana(int x)
-    {
-        GameController.mana += x;
-    }
 
     public void addManaNextTurn(int x)
     {
@@ -37,7 +33,7 @@ public class CardEffect : MonoBehaviour
     {
         for (int i = 0; i < GameController.MarketCards.Count; i ++)
         {
-            GameController.MarketCards[i].GetComponent<CardScript>().manaCost += x;
+           //GameController.MarketCards[i].GetComponent<CardScript>().manaCost += x;
         }
     }
 
@@ -49,13 +45,13 @@ public class CardEffect : MonoBehaviour
         Destroy(clickedCard);
     }
 
-    public void discardTypeOfCard(GameObject clickedCard, string type)
-    {
-        if (clickedCard.GetComponent<CardScript>().cardType == type)
-        {
-            discard(clickedCard);
-        }
-    }
+    //public void discardTypeOfCard(GameObject clickedCard, string type)
+    //{
+    //    if (clickedCard.GetComponent<CardScript>().cardType == type)
+    //    {
+    //        discard(clickedCard);
+    //    }
+    //}
 
     public void moveFromDeckToDiscard(GameObject clickedCard)
     {
@@ -161,10 +157,10 @@ public class CardEffect : MonoBehaviour
         int count = 0;
         for (int x = 0; x < GameController.Hand.Count; x++)
         {
-            if (GameController.Hand[x].GetComponent<CardScript>().cardType == inputType)
-            {
-                count++;
-            }
+            //if (GameController.Hand[x].GetComponent<CardScript>().cardType == inputType)
+            //{
+            //    count++;
+            //}
         }
         return count;
     }
@@ -174,10 +170,10 @@ public class CardEffect : MonoBehaviour
         int count = 0;
         for (int x = 0; x < GameController.DiscardPile.Count; x++)
         {
-            if (GameController.DiscardPile[x].GetComponent<CardScript>().cardType == inputType)
-            {
-                count++;
-            }
+            //if (GameController.DiscardPile[x].GetComponent<CardScript>().cardType == inputType)
+            //{
+            //    count++;
+            //}
         }
         return count;
     }
