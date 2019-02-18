@@ -45,6 +45,8 @@ public class CardEffect : MonoBehaviour
         Destroy(clickedCard);
     }
 
+
+
     //public void discardTypeOfCard(GameObject clickedCard, string type)
     //{
     //    if (clickedCard.GetComponent<CardScript>().cardType == type)

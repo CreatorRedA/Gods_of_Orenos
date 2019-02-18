@@ -8,12 +8,13 @@ public class Wizard : Card, IPointerClickHandler
 
     public Wizard()
     {
+        this.cardType = "Creature";
         this.playOnceOnly = false;
         this.alreadyPurchased = true;
     }
     protected override void onPlay()
     {
-        manaAdd = 1;
+        manaAdd = 2;
         if (!playOnceOnly)
         {
             gameController.addMana(manaAdd);

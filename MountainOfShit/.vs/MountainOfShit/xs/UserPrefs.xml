@@ -1,15 +1,15 @@
 ﻿<Properties StartupConfiguration="{E4E8AA83-E580-F6E7-6A30-DF3A282F82B8}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CardEffect.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Cards/Card/ChildClasses/NewClass.cs">
     <Files>
-      <File FileName="Assets/Scripts/GameController.cs" Line="231" Column="37" />
+      <File FileName="Assets/Scripts/GameController.cs" Line="180" Column="13" />
       <File FileName="Assets/Scripts/DropZone.cs" Line="34" Column="40" />
-      <File FileName="Assets/Scripts/CardEffect.cs" Line="36" Column="40" />
+      <File FileName="Assets/Scripts/CardEffect.cs" Line="106" Column="31" />
       <File FileName="Assets/Scripts/Draggable.cs" Line="1" Column="1" />
       <File FileName="Assets/Cards/Card/QuestCard.cs" Line="4" Column="18" />
-      <File FileName="Assets/Scripts/GameController.cs" Line="24" Column="5" />
-      <File FileName="Assets/Cards/Card/ChildClasses/AegisOfOrenos.cs" Line="22" Column="2" />
-      <File FileName="Assets/Cards/Card/ChildClasses/Wizard.cs" Line="19" Column="29" />
-      <File FileName="Assets/Cards/Card/Card.cs" Line="80" Column="6" />
+      <File FileName="Assets/Cards/Card/ChildClasses/AegisOfOrenos.cs" Line="11" Column="30" />
+      <File FileName="Assets/Cards/Card/ChildClasses/Wizard.cs" Line="11" Column="36" />
+      <File FileName="Assets/Cards/Card/Card.cs" Line="44" Column="47" />
+      <File FileName="Assets/Cards/Card/ChildClasses/NewClass.cs" Line="3" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

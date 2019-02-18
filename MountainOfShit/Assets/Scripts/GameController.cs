@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -15,7 +16,10 @@ public class GameController : MonoBehaviour
 
     //mana list
     public List<Image> manaIcons;
+    public Text manaCount;
 
+    //destroy item bool
+    public static bool canDestroyItem;
     //quest indicator
     public static bool quest1done;
     public static bool quest2done;
@@ -37,6 +41,9 @@ public class GameController : MonoBehaviour
     //mana image
     public Image manaIcon;
 
+    //turn counter text and count
+    public Text turnCounter;
+    int turnCount = 0;
     //curse indicator
     public static bool curse1;
     public static bool curse2;
@@ -97,6 +104,8 @@ public class GameController : MonoBehaviour
     //initialization
     public void Start()
     {
+
+        turnCounter.text = turnCount.ToString();
         manaIcons = new List<Image>();
         MarketCards = new List<GameObject>();
         DrawDeck = new List<GameObject>();
@@ -110,6 +119,7 @@ public class GameController : MonoBehaviour
         cardDrawed = 5;
         initializeDrawDeck();
         initializeMarketCard();
+        manaCount.text = mana.ToString();
         for(int i = 0; i < 5; i++)
         {
             int RANDOM = Random.Range(0, MarketCards.Count);
@@ -131,6 +141,7 @@ public class GameController : MonoBehaviour
     public void addMana(int manaAdd)
     {
         mana += manaAdd;
+        manaCount.text = mana.ToString();
         Image manaObj = Instantiate(manaIcon);
         manaIcons.Add(manaObj);
         for (int i = 0; i < manaAdd; i++)
@@ -138,11 +149,13 @@ public class GameController : MonoBehaviour
             manaIcons.Add(manaObj);
             manaObj.transform.SetParent(manaPanel.transform);
         }
+
     }
     //loose mana and delete picture of mana
     public void looseMana(int manaLoss)
     {
         mana -= manaLoss;
+        manaCount.text = mana.ToString();
         Destroy(manaIcons[0]);
         for (int i = 0; i < manaLoss; i++)
         {
@@ -157,7 +170,12 @@ public class GameController : MonoBehaviour
         {
             GameObject wizardObj = Instantiate(wizard);
             if (x < 5) wizardObj.transform.SetParent(handPanel.transform);
-            else wizardObj.transform.SetParent(deckScrollPanelContent.transform);
+            else
+            {
+                wizardObj.transform.SetParent(deckScrollPanelContent.transform);
+                DrawDeck.Add(wizardObj);
+            }
+
         }
     }
 
@@ -166,7 +184,7 @@ public class GameController : MonoBehaviour
         for (int x = 0; x < 3; x++)
         {
             MarketCards.Add(aegisOfOrenos);
-            //MarketCards.Add(angelicIntervention);
+            MarketCards.Add(angelicIntervention);
             //MarketCards.Add(aromoredMammoth);
             //MarketCards.Add(bladeOfAeons);
             //MarketCards.Add(chronoLocket);
@@ -233,5 +251,16 @@ public class GameController : MonoBehaviour
     public void onTurnEnd()
     {
         turnOver = true;
+        turnCount += 1;
+        turnCounter.text = turnCount.ToString();
+        if(turnCount >= 8)
+        {
+            endGame();
+        }
+        canDestroyItem = false;
+    }
+    public void endGame()
+    {
+        SceneManager.LoadScene("GameOver");
     }
 }
