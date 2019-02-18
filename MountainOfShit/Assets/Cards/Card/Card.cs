@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
-public class Card : MonoBehaviour
+public class Card : MonoBehaviour, IPointerClickHandler
 {
     /*
      * Parent Class for all cards to inherit from
-     * 
      */
 
     public bool playOnceOnly = false;
@@ -14,6 +14,8 @@ public class Card : MonoBehaviour
     public GameController gameController;
 
     public GameObject clickedCard;
+
+    public int totalMana;
 
     public Transform hand;
     public Transform tableTop;
@@ -28,6 +30,10 @@ public class Card : MonoBehaviour
 
     public void Start()
     {
+        if (!alreadyPurchased)
+        {
+            this.GetComponent<Draggable>().enabled = false;
+        }
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         tableTop = GameObject.FindGameObjectWithTag("TableTop").transform;
         market = GameObject.FindGameObjectWithTag("Market").transform;
@@ -42,12 +48,28 @@ public class Card : MonoBehaviour
         {
             onPlay();
         }
+
     }
     protected virtual void onPlay()
     {
 
     }
     
+    public void purchaseCard()
+    {
+        totalMana = gameController.getMana();
+        if(totalMana>= manaCost)
+        {
+            this.transform.parent = hand;
+            this.GetComponent<Draggable>().enabled = true;
+            gameController.looseMana(manaCost);
+        }
 
+    }
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log("HI");
+        this.purchaseCard();
+    }
 }

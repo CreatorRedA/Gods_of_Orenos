@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Cards\Card\Card.cs" />
+    <Compile Include="Assets\Cards\Card\ChildClasses\AegisOfOrenos.cs" />
     <Compile Include="Assets\Cards\Card\ChildClasses\Wizard.cs" />
     <Compile Include="Assets\Cards\Card\QuestCard.cs" />
     <Compile Include="Assets\Scripts\CardEffect.cs" />

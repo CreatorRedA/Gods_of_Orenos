@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Wizard : Card
+public class Wizard : Card, IPointerClickHandler
 {
 
     public Wizard()
@@ -15,7 +16,7 @@ public class Wizard : Card
         manaAdd = 1;
         if (!playOnceOnly)
         {
-            gameController.addOneMana(manaAdd);
+            gameController.addMana(manaAdd);
             playOnceOnly = true;
         }
     }

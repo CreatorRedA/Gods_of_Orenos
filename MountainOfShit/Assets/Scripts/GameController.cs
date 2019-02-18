@@ -13,6 +13,9 @@ public class GameController : MonoBehaviour
     public static List<GameObject> Hand;
     public static List<GameObject> ItemInUse;
 
+    //mana list
+    public List<Image> manaIcons;
+
     //quest indicator
     public static bool quest1done;
     public static bool quest2done;
@@ -78,10 +81,15 @@ public class GameController : MonoBehaviour
     public static int itemPlayedThisTurn;
 
 
-
-
+    //Able to access mana through method
+    public int getMana()
+    {
+        return mana;
+    }
+    //initialization
     public void Start()
     {
+        manaIcons = new List<Image>();
         MarketCards = new List<GameObject>();
         DrawDeck = new List<GameObject>();
         DiscardPile = new List<GameObject>();
@@ -99,14 +107,15 @@ public class GameController : MonoBehaviour
         cardDrawed = 5;
 
         initializeMarketCard();
-        foreach(GameObject go in MarketCards)
+        for(int i = 0; i < 5; i++)
         {
-            GameObject marketObj = Instantiate(go);
+            int RANDOM = Random.Range(0, MarketCards.Count);
+            GameObject marketObj = Instantiate(MarketCards[RANDOM]);
             marketObj.transform.SetParent(marketPanel.transform);
         }
 
     }
-
+    //called ever frame
     void Update()
     {
         if (numberOfQuestCompleted >= 3)
@@ -115,14 +124,28 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void addOneMana(int manaAdd)
+    public void addMana(int manaAdd)
     {
         mana += manaAdd;
         Image manaObj = Instantiate(manaIcon);
+        manaIcons.Add(manaObj);
         for (int i = 0; i < manaAdd; i++)
         {
+            manaIcons.Add(manaObj);
             manaObj.transform.SetParent(manaPanel.transform);
         }
+    }
+    //loose mana and delete picture of mana
+    public void looseMana(int manaLoss)
+    {
+        mana -= manaLoss;
+        Destroy(manaIcons[0]);
+        for (int i = 0; i < manaLoss; i++)
+        {
+            Destroy(manaIcons[i]);
+            manaIcons.RemoveAt(i);
+        }
+
     }
     void initializeDrawDeck()
     {
@@ -137,32 +160,32 @@ public class GameController : MonoBehaviour
         for (int x = 0; x < 3; x++)
         {
             MarketCards.Add(aegisOfOrenos);
-            MarketCards.Add(angelicIntervention);
-            MarketCards.Add(aromoredMammoth);
-            MarketCards.Add(bladeOfAeons);
-            MarketCards.Add(chronoLocket);
-            MarketCards.Add(comfortingFlame);
-            MarketCards.Add(consumePower);
-            MarketCards.Add(craft);
-            MarketCards.Add(divine);
-            MarketCards.Add(empower);
-            MarketCards.Add(firewoodSpirt);
-            MarketCards.Add(grandPurifier);
-            MarketCards.Add(greatDryad);
-            MarketCards.Add(hindranceCharm);
-            MarketCards.Add(jetBlackFlower);
-            MarketCards.Add(jeweledSerpent);
-            MarketCards.Add(luckyElf);
-            MarketCards.Add(manaLeech);
-            MarketCards.Add(manaVial);
-            MarketCards.Add(mindParasite);
-            MarketCards.Add(search);
-            MarketCards.Add(shopKeepsFavor);
-            MarketCards.Add(spireOfPower);
-            MarketCards.Add(spiritIdol);
-            MarketCards.Add(warBeast);
-            MarketCards.Add(warp);
-            MarketCards.Add(wormhole);
+            //MarketCards.Add(angelicIntervention);
+            //MarketCards.Add(aromoredMammoth);
+            //MarketCards.Add(bladeOfAeons);
+            //MarketCards.Add(chronoLocket);
+            //MarketCards.Add(comfortingFlame);
+            //MarketCards.Add(consumePower);
+            //MarketCards.Add(craft);
+            //MarketCards.Add(divine);
+            //MarketCards.Add(empower);
+            //MarketCards.Add(firewoodSpirt);
+            //MarketCards.Add(grandPurifier);
+            //MarketCards.Add(greatDryad);
+            //MarketCards.Add(hindranceCharm);
+            //MarketCards.Add(jetBlackFlower);
+            //MarketCards.Add(jeweledSerpent);
+            //MarketCards.Add(luckyElf);
+            //MarketCards.Add(manaLeech);
+            //MarketCards.Add(manaVial);
+            //MarketCards.Add(mindParasite);
+            //MarketCards.Add(search);
+            //MarketCards.Add(shopKeepsFavor);
+            //MarketCards.Add(spireOfPower);
+            //MarketCards.Add(spiritIdol);
+            //MarketCards.Add(warBeast);
+            //MarketCards.Add(warp);
+            //MarketCards.Add(wormhole);
         }
     }
 
