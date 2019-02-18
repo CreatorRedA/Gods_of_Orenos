@@ -17,9 +17,10 @@ public class Card : MonoBehaviour, IPointerClickHandler
 
     public int totalMana;
 
-    public Transform hand;
-    public Transform tableTop;
-    public Transform market;
+    private Transform hand;
+    private Transform tableTop;
+    private Transform market;
+    public Transform discard;
 
     public string cardTitle;
     public string cardType;
@@ -27,6 +28,8 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public string manaAddString;
     public int manaCost;
     public int manaAdd;
+
+    public bool isItem = false;
 
     public void Start()
     {
@@ -38,6 +41,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
         tableTop = GameObject.FindGameObjectWithTag("TableTop").transform;
         market = GameObject.FindGameObjectWithTag("Market").transform;
         hand = GameObject.FindGameObjectWithTag("Hand").transform;
+        discard = GameObject.FindGameObjectWithTag("Discard").transform;
     }
 
 
@@ -47,6 +51,11 @@ public class Card : MonoBehaviour, IPointerClickHandler
         if (transform.parent == tableTop)
         {
             onPlay();
+            this.GetComponent<Draggable>().enabled = false;
+        }
+        if(gameController.turnOver == true)
+        {
+            this.transform.parent = discard; 
         }
 
     }
@@ -71,5 +80,8 @@ public class Card : MonoBehaviour, IPointerClickHandler
     {
         Debug.Log("HI");
         this.purchaseCard();
+    }
+    public void addManaCost()
+    {
     }
 }

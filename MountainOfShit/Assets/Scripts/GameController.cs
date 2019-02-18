@@ -27,6 +27,12 @@ public class GameController : MonoBehaviour
     public GameObject handPanel;
     public GameObject manaPanel;
     public GameObject marketPanel;
+    //scroll panels
+    public GameObject deckScrollPanel;
+    public GameObject deckScrollPanelContent;
+
+    public GameObject discardScrollPanel;
+    public GameObject discardScrollPanelContent;
 
     //mana image
     public Image manaIcon;
@@ -80,6 +86,8 @@ public class GameController : MonoBehaviour
     public static int creaturePlayedThisTurn;
     public static int itemPlayedThisTurn;
 
+    public bool turnOver;
+
 
     //Able to access mana through method
     public int getMana()
@@ -95,17 +103,12 @@ public class GameController : MonoBehaviour
         DiscardPile = new List<GameObject>();
         Hand = new List<GameObject>();
         ItemInUse = new List<GameObject>();
-        for(int x = 0; x < 5; x++)
-        {
-            GameObject wizardObj = Instantiate(wizard);
-            wizardObj.transform.SetParent(handPanel.transform);
-        }
         mana = 0;
         manaNextTurn = 0;
         numberOfQuestCompleted = 0;
         turns = 0;
         cardDrawed = 5;
-
+        initializeDrawDeck();
         initializeMarketCard();
         for(int i = 0; i < 5; i++)
         {
@@ -113,6 +116,7 @@ public class GameController : MonoBehaviour
             GameObject marketObj = Instantiate(MarketCards[RANDOM]);
             marketObj.transform.SetParent(marketPanel.transform);
         }
+
 
     }
     //called ever frame
@@ -151,7 +155,9 @@ public class GameController : MonoBehaviour
     {
         for (int x = 0; x < 10; x++)
         {
-            DrawDeck.Add(wizard);
+            GameObject wizardObj = Instantiate(wizard);
+            if (x < 5) wizardObj.transform.SetParent(handPanel.transform);
+            else wizardObj.transform.SetParent(deckScrollPanelContent.transform);
         }
     }
 
@@ -216,21 +222,16 @@ public class GameController : MonoBehaviour
                 GameObject.FindGameObjectWithTag("Hand").transform);
         }
     }
-
-    //public void buyCard (GameObject clickedCard)
-    //{
-    //    int cost = clickedCard.GetComponent<CardScript>().manaCost;
-    //    int CardIndex = MarketCards.IndexOf(clickedCard);
-    //    if (mana >= cost)
-    //    {
-    //        mana -= cost;
-    //        DrawDeck.Add(MarketCards[CardIndex]);
-    //        MarketCards.RemoveAt(CardIndex);
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("No engough mana");
-    //    }
-
-    //}
+    public void deckOnClick()
+    {
+        deckScrollPanel.SetActive(!deckScrollPanel.activeSelf);
+    }
+    public void discardOnClick()
+    {
+        discardScrollPanel.SetActive(!discardScrollPanel.activeSelf);
+    }
+    public void onTurnEnd()
+    {
+        turnOver = true;
+    }
 }
