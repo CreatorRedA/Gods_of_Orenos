@@ -11,7 +11,6 @@ public class GameController : MonoBehaviour
     public static List<GameObject> DrawDeck;
     public static List<GameObject> DiscardPile;
     public static List<GameObject> Hand;
-    public static List<GameObject> NextHand;
     public static List<GameObject> ItemInUse;
 
     //quest indicator
@@ -20,6 +19,14 @@ public class GameController : MonoBehaviour
     public static bool quest3done;
     public static bool quest4done;
     public static bool quest5done;
+
+    //curse indicator
+    public static bool curse1;
+    public static bool curse2;
+    public static bool curse3;
+    public static bool curse4;
+    public static bool curse5;
+    public static bool curse6;
 
     //loading card prefabs
     public GameObject aegisOfOrenos;
@@ -55,6 +62,13 @@ public class GameController : MonoBehaviour
     public static int mana;
     public static int manaNextTurn;
     public static int numberOfQuestCompleted;
+    public static int turns;
+    public static int cardDrawed;
+
+    public static int spellPlayedThisTurn;
+    public static int creaturePlayedThisTurn;
+    public static int itemPlayedThisTurn;
+
 
 
 
@@ -64,9 +78,13 @@ public class GameController : MonoBehaviour
         DrawDeck = new List<GameObject>();
         DiscardPile = new List<GameObject>();
         Hand = new List<GameObject>();
-        NextHand = new List<GameObject>();
         ItemInUse = new List<GameObject>();
 
+        mana = 0;
+        manaNextTurn = 0;
+        numberOfQuestCompleted = 0;
+        turns = 0;
+        cardDrawed = 5;
 
     }
 
@@ -122,6 +140,46 @@ public class GameController : MonoBehaviour
 
     public static void endTheGame()
     {
+        if (numberOfQuestCompleted >=3)
+        {
+            Debug.Log("You Win!");
+        }
+
+        else if( turns >= 10 && numberOfQuestCompleted < 3)
+        {
+            Debug.Log("You Lose");
+        }
+    }
+
+    public void drawToHand(int i)
+    {
+        for (int x = 0; x < i; x++)
+        {
+            Hand.Add(DrawDeck[0]);
+            DrawDeck.RemoveAt(0);
+        }
+
+        for (int x = 0; x < Hand.Count; x++)
+        {
+            Instantiate(Hand[x], new Vector2(0, 0), Quaternion.identity,
+                GameObject.FindGameObjectWithTag("Hand").transform);
+        }
+    }
+
+    public void buyCard (GameObject clickedCard)
+    {
+        int cost = clickedCard.GetComponent<CardScript>().manaCost;
+        int CardIndex = MarketCards.IndexOf(clickedCard);
+        if (mana >= cost)
+        {
+            mana -= cost;
+            DrawDeck.Add(MarketCards[CardIndex]);
+            MarketCards.RemoveAt(CardIndex);
+        }
+        else
+        {
+            Debug.Log("No engough mana");
+        }
 
     }
 }
