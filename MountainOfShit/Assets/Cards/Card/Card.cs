@@ -81,7 +81,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
         Debug.Log("HI");
         this.purchaseCard();
     }
-    public void addManaCost()
+    public void changeManaCost(int change)
     {
     }
 }
