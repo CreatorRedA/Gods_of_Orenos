@@ -14,7 +14,7 @@ public class Wizard : Card, IPointerClickHandler
     }
     protected override void onPlay()
     {
-        manaAdd = 2;
+        manaAdd = 5;
         if (!playOnceOnly)
         {
             gameController.addMana(manaAdd);

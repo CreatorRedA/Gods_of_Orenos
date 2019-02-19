@@ -7,6 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    /*
+     * 44-82: Noah
+     * 
+     * 43-0: Feiyi
+     */    
     //card list
     public static List<GameObject> MarketCards;
     public static List<GameObject> DrawDeck;
@@ -21,7 +26,7 @@ public class GameController : MonoBehaviour
     //destroy item bool
     public static bool canDestroyItem;
     //quest indicator
-    public static bool quest1done;
+    public bool questGorenaDone;
     public static bool quest2done;
     public static bool quest3done;
     public static bool quest4done;
@@ -31,6 +36,7 @@ public class GameController : MonoBehaviour
     public GameObject handPanel;
     public GameObject manaPanel;
     public GameObject marketPanel;
+    public GameObject questPanel;
     //scroll panels
     public GameObject deckScrollPanel;
     public GameObject deckScrollPanelContent;
@@ -51,7 +57,8 @@ public class GameController : MonoBehaviour
     public static bool curse4;
     public static bool curse5;
     public static bool curse6;
-
+    //Quest Card Prefabs
+    public GameObject Gorena;
     //loading card prefabs
     public GameObject aegisOfOrenos;
     public GameObject angelicIntervention;
@@ -104,7 +111,7 @@ public class GameController : MonoBehaviour
     //initialization
     public void Start()
     {
-
+        GameObject go = Instantiate(Gorena);
         turnCounter.text = turnCount.ToString();
         manaIcons = new List<Image>();
         MarketCards = new List<GameObject>();
@@ -141,6 +148,11 @@ public class GameController : MonoBehaviour
     public void addMana(int manaAdd)
     {
         mana += manaAdd;
+        if (mana >= 20)
+        {
+            Debug.Log("HI");
+            questGorenaDone = true;
+        }
         manaCount.text = mana.ToString();
         Image manaObj = Instantiate(manaIcon);
         manaIcons.Add(manaObj);
@@ -149,6 +161,7 @@ public class GameController : MonoBehaviour
             manaIcons.Add(manaObj);
             manaObj.transform.SetParent(manaPanel.transform);
         }
+
 
     }
     //loose mana and delete picture of mana
@@ -178,7 +191,11 @@ public class GameController : MonoBehaviour
 
         }
     }
-
+    void initializeQuestCard()
+    {
+        GameObject gorenaObj = Instantiate(Gorena);
+        gorenaObj.transform.SetParent(questPanel.transform);
+    }
     void initializeMarketCard()
     {
         for (int x = 0; x < 3; x++)

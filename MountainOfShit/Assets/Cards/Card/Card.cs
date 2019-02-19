@@ -77,7 +77,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
         totalMana = gameController.getMana();
         if(totalMana>= manaCost)
         {
-            this.transform.parent = hand;
+            this.transform.SetParent(hand);
             this.GetComponent<Draggable>().enabled = true;
             gameController.looseMana(manaCost);
         }

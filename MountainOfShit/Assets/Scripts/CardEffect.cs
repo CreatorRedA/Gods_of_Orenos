@@ -114,7 +114,6 @@ public class CardEffect : MonoBehaviour
     {
         if (questNumber == 1)
         {
-            GameController.quest1done = true;
         }
         if (questNumber == 2)
         {
