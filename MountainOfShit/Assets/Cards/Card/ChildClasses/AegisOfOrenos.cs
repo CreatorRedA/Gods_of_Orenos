@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class AegisOfOrenos : Card, IPointerClickHandler
 {
+
     public AegisOfOrenos()
     {
         this.manaCost = 2;

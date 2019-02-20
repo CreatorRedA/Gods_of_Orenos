@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Card : MonoBehaviour, IPointerClickHandler
 {
@@ -21,11 +22,14 @@ public class Card : MonoBehaviour, IPointerClickHandler
     private Transform tableTop;
     private Transform market;
     public Transform discard;
+    public Text cardTypeUI;
 
     public string cardTitle;
     public string cardType;
+
     public string manaCostString;
     public string manaAddString;
+
     public int manaCost;
     public int manaAdd;
 
@@ -42,6 +46,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
         market = GameObject.FindGameObjectWithTag("Market").transform;
         hand = GameObject.FindGameObjectWithTag("Hand").transform;
         discard = gameController.discardScrollPanelContent.transform;
+        cardType = cardTypeUI.text;
     }
 
 
@@ -55,7 +60,10 @@ public class Card : MonoBehaviour, IPointerClickHandler
         }
         if(gameController.turnOver == true)
         {
-            this.transform.parent = discard; 
+            if (!cardType.Equals("Item")&& alreadyPurchased){
+                this.transform.parent = discard;
+            }
+
         }
 
     }
@@ -69,7 +77,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
         totalMana = gameController.getMana();
         if(totalMana>= manaCost)
         {
-            this.transform.parent = hand;
+            this.transform.SetParent(hand);
             this.GetComponent<Draggable>().enabled = true;
             gameController.looseMana(manaCost);
         }
@@ -80,6 +88,10 @@ public class Card : MonoBehaviour, IPointerClickHandler
     {
         Debug.Log("HI");
         this.purchaseCard();
+        if (GameController.canDestroyItem && cardType.Equals("Item")&& alreadyPurchased)
+        {
+            Destroy(this);
+        }
     }
     public void changeManaCost(int change)
     {

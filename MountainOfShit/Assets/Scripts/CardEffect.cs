@@ -45,6 +45,8 @@ public class CardEffect : MonoBehaviour
         Destroy(clickedCard);
     }
 
+
+
     //public void discardTypeOfCard(GameObject clickedCard, string type)
     //{
     //    if (clickedCard.GetComponent<CardScript>().cardType == type)
@@ -112,7 +114,6 @@ public class CardEffect : MonoBehaviour
     {
         if (questNumber == 1)
         {
-            GameController.quest1done = true;
         }
         if (questNumber == 2)
         {
