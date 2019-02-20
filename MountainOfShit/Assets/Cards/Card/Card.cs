@@ -87,7 +87,10 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("HI");
-        this.purchaseCard();
+        if (this.alreadyPurchased == false)
+        {
+            this.purchaseCard();
+        }
         if (GameController.canDestroyItem && cardType.Equals("Item")&& alreadyPurchased)
         {
             Destroy(this);
