@@ -16,6 +16,7 @@ namespace Application
             {
                 GameController.canDestroyItem = true;
                 gameController.drawToHand(3);
+                this.transform.SetParent(discard);
                 playOnceOnly = true;
             }
         }

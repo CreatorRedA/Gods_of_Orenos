@@ -15,7 +15,6 @@ public class QuestCard : MonoBehaviour
         if (gameController.questGorenaDone)
         {
             gameObject.transform.SetParent(gameController.questPanel.transform);
-            Debug.Log("gotit");
         }
     }
 }

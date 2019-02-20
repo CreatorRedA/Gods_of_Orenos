@@ -8,10 +8,12 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     /*
+     * 
      * 44-82: Noah
      * 
      * 43-0: Feiyi
-     */    
+     */
+     //TODO make cards
     //card list
     public static List<GameObject> MarketCards;
     public static List<GameObject> DrawDeck;
