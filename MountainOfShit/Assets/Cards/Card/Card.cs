@@ -46,13 +46,17 @@ public class Card : MonoBehaviour, IPointerClickHandler
         market = GameObject.FindGameObjectWithTag("Market").transform;
         hand = GameObject.FindGameObjectWithTag("Hand").transform;
         discard = gameController.discardScrollPanelContent.transform;
-        cardType = cardTypeUI.text;
     }
 
 
     // Update is called once per frame
     public void Update()
     {
+        if(gameController.canDestroyItem&& cardType.Equals("Item"))
+        {
+            Debug.Log("HI");
+        }
+
         if (transform.parent == tableTop)
         {
             onPlay();
@@ -60,8 +64,9 @@ public class Card : MonoBehaviour, IPointerClickHandler
         }
         if(gameController.turnOver == true)
         {
-            if (!cardType.Equals("Item")&& alreadyPurchased){
-                this.transform.parent = discard;
+            Debug.Log("HI");
+            if (alreadyPurchased){
+                Destroy(this);
             }
 
         }
@@ -80,19 +85,21 @@ public class Card : MonoBehaviour, IPointerClickHandler
             this.transform.SetParent(hand);
             this.GetComponent<Draggable>().enabled = true;
             gameController.looseMana(manaCost);
+            this.alreadyPurchased = true;
         }
 
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("HI");
+        Debug.Log(cardType);
         if (this.alreadyPurchased == false)
         {
             this.purchaseCard();
         }
-        if (GameController.canDestroyItem && cardType.Equals("Item")&& alreadyPurchased)
+        else if (gameController.canDestroyItem && cardType.Equals("Item"))
         {
+            Debug.Log("a");
             Destroy(this);
         }
     }

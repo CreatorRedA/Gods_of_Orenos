@@ -9,6 +9,7 @@ public class AegisOfOrenos : Card, IPointerClickHandler
     public AegisOfOrenos()
     {
         this.manaCost = 2;
+        cardType = "Item";
     }
 
     protected override void onPlay()
