@@ -7,13 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    public Transform tabletop;
     /*
-     * 
      * 44-82: Noah
      * 
      * 43-0: Feiyi
      */
-     //TODO make cards
     //card list
     public static List<GameObject> MarketCards;
     public static List<GameObject> DrawDeck;
@@ -26,7 +25,7 @@ public class GameController : MonoBehaviour
     public Text manaCount;
 
     //destroy item bool
-    public static bool canDestroyItem;
+    public bool canDestroyItem;
     //quest indicator
     public bool questGorenaDone;
     public static bool quest2done;
@@ -104,6 +103,8 @@ public class GameController : MonoBehaviour
 
     public bool turnOver;
 
+    //clicked card indicator
+    public static GameObject clickedCard;
 
     //Able to access mana through method
     public int getMana()
@@ -113,6 +114,7 @@ public class GameController : MonoBehaviour
     //initialization
     public void Start()
     {
+        tabletop = GameObject.FindGameObjectWithTag("TableTop").transform;
         GameObject go = Instantiate(Gorena);
         turnCounter.text = turnCount.ToString();
         manaIcons = new List<Image>();
@@ -129,7 +131,7 @@ public class GameController : MonoBehaviour
         initializeDrawDeck();
         initializeMarketCard();
         manaCount.text = mana.ToString();
-        for(int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
         {
             int RANDOM = Random.Range(0, MarketCards.Count);
             GameObject marketObj = Instantiate(MarketCards[RANDOM]);
@@ -145,7 +147,10 @@ public class GameController : MonoBehaviour
         {
             endTheGame();
         }
+
     }
+
+
 
     public void addMana(int manaAdd)
     {
@@ -204,7 +209,7 @@ public class GameController : MonoBehaviour
         {
             MarketCards.Add(aegisOfOrenos);
             MarketCards.Add(angelicIntervention);
-            //MarketCards.Add(aromoredMammoth);
+            MarketCards.Add(aromoredMammoth);
             //MarketCards.Add(bladeOfAeons);
             //MarketCards.Add(chronoLocket);
             //MarketCards.Add(comfortingFlame);
@@ -234,12 +239,12 @@ public class GameController : MonoBehaviour
 
     public static void endTheGame()
     {
-        if (numberOfQuestCompleted >=3)
+        if (numberOfQuestCompleted >= 3)
         {
             Debug.Log("You Win!");
         }
 
-        else if( turns >= 10 && numberOfQuestCompleted < 3)
+        else if (turns >= 10 && numberOfQuestCompleted < 3)
         {
             Debug.Log("You Lose");
         }
@@ -272,12 +277,24 @@ public class GameController : MonoBehaviour
         turnOver = true;
         turnCount += 1;
         turnCounter.text = turnCount.ToString();
-        if(turnCount >= 8)
+        if (turnCount >= 8)
         {
             endGame();
         }
         canDestroyItem = false;
     }
+
+    public void destroyItem(GameObject clickedCard)
+    {
+        if (clickedCard.GetComponent<Card>().cardType == "Item" && clickedCard.transform.parent == tabletop && canDestroyItem)
+        {
+            int index = ItemInUse.IndexOf(clickedCard);
+            DiscardPile.Add(ItemInUse[index]);
+            ItemInUse.RemoveAt(index);
+            Destroy(clickedCard);
+        }
+    }
+
     public void endGame()
     {
         SceneManager.LoadScene("GameOver");
