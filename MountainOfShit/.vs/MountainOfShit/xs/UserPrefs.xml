@@ -8,7 +8,7 @@
       <File FileName="Assets/Cards/Card/QuestCard.cs" Line="17" Column="81" />
       <File FileName="Assets/Cards/Card/ChildClasses/AegisOfOrenos.cs" Line="12" Column="17" />
       <File FileName="Assets/Cards/Card/ChildClasses/Wizard.cs" Line="22" Column="13" />
-      <File FileName="Assets/Cards/Card/Card.cs" Line="92" Column="5" />
+      <File FileName="Assets/Cards/Card/Card.cs" Line="92" Column="1" />
       <File FileName="Assets/Cards/Card/ChildClasses/AngelicIntervention.cs" Line="23" Column="37" />
     </Files>
   </MonoDevelop.Ide.Workbench>
