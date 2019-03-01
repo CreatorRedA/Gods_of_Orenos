@@ -59,36 +59,24 @@ public class GameController : MonoBehaviour
     public static bool curse5;
     public static bool curse6;
     //Quest Card Prefabs
-    public GameObject Gorena;
     //loading card prefabs
     public GameObject aegisOfOrenos;
     public GameObject angelicIntervention;
-    public GameObject aromoredMammoth;
-    public GameObject bladeOfAeons;
-    public GameObject chronoLocket;
     public GameObject comfortingFlame;
-    public GameObject consumePower;
-    public GameObject craft;
     public GameObject divine;
     public GameObject empower;
-    public GameObject firewoodSpirt;
-    public GameObject grandPurifier;
-    public GameObject greatDryad;
-    public GameObject hindranceCharm;
     public GameObject jetBlackFlower;
-    public GameObject jeweledSerpent;
     public GameObject luckyElf;
-    public GameObject manaLeech;
     public GameObject manaVial;
     public GameObject mindParasite;
-    public GameObject search;
     public GameObject shopKeepsFavor;
+    public GameObject smelt;
     public GameObject spireOfPower;
-    public GameObject spiritIdol;
     public GameObject warBeast;
-    public GameObject warp;
+    public GameObject pyschichHiveQueen;
+    public GameObject goodBoy;
+    public GameObject druid;
     public GameObject wizard;
-    public GameObject wormhole;
 
     //variables
     public static int mana;
@@ -115,7 +103,6 @@ public class GameController : MonoBehaviour
     public void Start()
     {
         tabletop = GameObject.FindGameObjectWithTag("TableTop").transform;
-        GameObject go = Instantiate(Gorena);
         turnCounter.text = turnCount.ToString();
         manaIcons = new List<Image>();
         MarketCards = new List<GameObject>();
@@ -200,8 +187,6 @@ public class GameController : MonoBehaviour
     }
     void initializeQuestCard()
     {
-        GameObject gorenaObj = Instantiate(Gorena);
-        gorenaObj.transform.SetParent(questPanel.transform);
     }
     void initializeMarketCard()
     {
@@ -209,7 +194,6 @@ public class GameController : MonoBehaviour
         {
             MarketCards.Add(aegisOfOrenos);
             MarketCards.Add(angelicIntervention);
-            MarketCards.Add(aromoredMammoth);
             //MarketCards.Add(bladeOfAeons);
             //MarketCards.Add(chronoLocket);
             //MarketCards.Add(comfortingFlame);

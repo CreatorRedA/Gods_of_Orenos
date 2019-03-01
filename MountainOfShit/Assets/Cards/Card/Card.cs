@@ -93,6 +93,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log(cardType);
+        Debug.Log(cardType);
         if (this.alreadyPurchased == false)
         {
             this.purchaseCard();
