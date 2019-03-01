@@ -85,7 +85,9 @@ public class GameController : MonoBehaviour
     public static int numberOfQuestCompleted;
     public static int turns;
     public static int cardDrawed;
+    public static int itemPlayed;
 
+    public static int cardDrawedThisTurn;
     public static int spellPlayedThisTurn;
     public static int creaturePlayedThisTurn;
     public static int itemPlayedThisTurn;
@@ -195,10 +197,9 @@ public class GameController : MonoBehaviour
     {
         for (int x = 0; x < 3; x++)
         {
-            //MarketCards.Add(aegisOfOrenos);
+            MarketCards.Add(aegisOfOrenos);
             MarketCards.Add(angelicIntervention);
-
-            //MarketCards.Add(comfortingFlame);
+            MarketCards.Add(comfortingFlame);
             //MarketCards.Add(consumePower);
             //MarketCards.Add(craft);
             //MarketCards.Add(divine);
@@ -259,8 +260,9 @@ public class GameController : MonoBehaviour
         discardScrollPanel.SetActive(!discardScrollPanel.activeSelf);
     }
     public void onTurnEnd()
-    {   
-        foreach(GameObject go in Hand)
+    {
+        cardDrawedThisTurn = 0;
+        foreach (GameObject go in Hand)
         {
             go.transform.SetParent(discardScrollPanel.transform);
             DiscardPile.Add(go);

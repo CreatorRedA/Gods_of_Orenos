@@ -4,7 +4,7 @@ public class ShopkeepersFavor: Card
     {
     public ShopkeepersFavor()
     {
-        this.manaCost = 11;
+        this.manaCost = 5;
         cardType = "Item";
     }
 

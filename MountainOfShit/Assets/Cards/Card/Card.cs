@@ -37,6 +37,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
 
     public void Start()
     {
+        Debug.Log(manaCost);
         if (!alreadyPurchased)
         {
             this.GetComponent<Draggable>().enabled = false;
@@ -57,11 +58,10 @@ public class Card : MonoBehaviour, IPointerClickHandler
             this.GetComponent<Draggable>().enabled = true;
         }
 
-        if (gameController.canDestroyItem&& cardType.Equals("Item"))
+        if (gameController.canDestroyItem && cardType.Equals("Item"))
         {
             Debug.Log("HI");
         }
-
         if (transform.parent == tableTop)
         {
             onPlay();

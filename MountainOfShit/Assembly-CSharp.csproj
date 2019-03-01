@@ -63,12 +63,10 @@
     <Compile Include="Assets\Cards\Card\Card.cs" />
     <Compile Include="Assets\Cards\Card\ChildClasses\AegisOfOrenos.cs" />
     <Compile Include="Assets\Cards\Card\ChildClasses\AngelicIntervention.cs" />
-    <Compile Include="Assets\Cards\Card\ChildClasses\ChronoLocket.cs" />
     <Compile Include="Assets\Cards\Card\ChildClasses\ComfortingFlame.cs" />
     <Compile Include="Assets\Cards\Card\ChildClasses\ShopkeepersFavor.cs" />
     <Compile Include="Assets\Cards\Card\ChildClasses\Wizard.cs" />
     <Compile Include="Assets\Cards\Card\QuestCard.cs" />
-    <Compile Include="Assets\Scripts\CardEffect.cs" />
     <Compile Include="Assets\Scripts\Draggable.cs" />
     <Compile Include="Assets\Scripts\DropZone.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />

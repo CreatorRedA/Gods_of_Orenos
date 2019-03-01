@@ -8,7 +8,7 @@ public class AegisOfOrenos : Card, IPointerClickHandler
 
     public AegisOfOrenos()
     {
-        this.manaCost = 2;
+        this.manaCost = 6;
         cardType = "Item";
     }
 

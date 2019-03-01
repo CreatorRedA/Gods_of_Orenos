@@ -5,10 +5,12 @@ using UnityEngine.EventSystems;
         public AngelicIntervention()
         {
             this.manaCost = 8;
+         
             this.playOnceOnly = false;
         }
         protected override void onPlay()
         {
+       
             if (!playOnceOnly)
             {
                 destroyItem(2);
