@@ -14,8 +14,7 @@ namespace Application
         {
             if (!playOnceOnly)
             {
-
-                discardRandomCards(2);
+                gameController.canDestroyItem = true;
 
                 gameController.drawToHand(3);
 

@@ -26,7 +26,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 		parentToReturnTo = this.transform.parent;
 		placeholderParent = parentToReturnTo;
 		this.transform.SetParent( this.transform.parent.parent );
-
+		
 		GetComponent<CanvasGroup>().blocksRaycasts = false;
 	}
 	
