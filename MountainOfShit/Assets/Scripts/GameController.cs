@@ -87,6 +87,8 @@ public class GameController : MonoBehaviour
     public static int cardDrawed;
     public static int itemPlayed;
 
+    public static int creaturePlayed;
+    public static int cardDiscarded;
     public static int cardDrawedThisTurn;
     public static int spellPlayedThisTurn;
     public static int creaturePlayedThisTurn;
@@ -142,7 +144,51 @@ public class GameController : MonoBehaviour
 
     }
 
+    void Gorena()
+    {
+        if (mana >= 20)
+        {
+            Debug.Log("HI");
+            questGorenaDone = true;
+            numberOfQuestCompleted += 1;
+        }
+    }
 
+    void Vorcona()
+    {
+        if (itemPlayed >= 7)
+        {
+            questVorconaDone = true;
+            numberOfQuestCompleted += 1;
+        }
+    }
+
+    void Niru()
+    {
+        if (cardDrawedThisTurn >= 5)
+        {
+            questNiruDone = true;
+            numberOfQuestCompleted += 1;
+        }
+    }
+
+    void Sentaal()
+    {
+        if (creaturePlayed >= 7)
+        {
+            questSentaalDone = true;
+            numberOfQuestCompleted += 1;
+        }
+    }
+
+    void Igej()
+    {
+        if (cardDiscarded >= 7)
+        {
+            questIgejDone = true;
+            numberOfQuestCompleted += 1;
+        }
+    }
 
     public void addMana(int manaAdd)
     {
