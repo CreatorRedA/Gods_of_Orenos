@@ -81,7 +81,11 @@ public class Card : MonoBehaviour, IPointerClickHandler
     {
 
     }
-    
+    public virtual void onDestroyItem()
+    {
+
+    }
+
     public void purchaseCard()
     {
         totalMana = gameController.getMana();
@@ -109,9 +113,6 @@ public class Card : MonoBehaviour, IPointerClickHandler
             Destroy(this);
         }
     }
-    public void changeManaCost(int change)
-    {
-    }
     public void discardRandomCards(int x)
     {
         for (int i = 0; i < x; i++)
@@ -126,4 +127,37 @@ public class Card : MonoBehaviour, IPointerClickHandler
             
         }
     }
+
+    public void destroyItem(int i)
+    {
+        if (GameController.ItemInUse.Count < i)
+        {
+            i = GameController.ItemInUse.Count;
+        }
+        for (int x = 0; x < i; x++)
+        {
+            GameController.ItemInUse[x].GetComponent<Card>().onDestroyItem();
+            GameController.ItemInUse[x].transform.SetParent(discard);
+        }
+        for (int x = 0; x < i; x++)
+        {
+            GameController.DiscardPile.Add(GameController.ItemInUse[x]);
+        }
+        for (int x = 0; x < i; x++)
+        {
+            GameController.ItemInUse.RemoveAt(0);
+        }
+            
+    }
+    public void changeManaCost(int i)
+    {
+        for (int x = 0; x < gameController.MarketCardsGameObject.Count; x++)
+        {
+            if (gameController.MarketCardsGameObject[x].GetComponent<Card>().manaCost > 0)
+            {
+                gameController.MarketCardsGameObject[x].GetComponent<Card>().manaCost += i;
+            }
+        }
+    }
+
 }

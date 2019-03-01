@@ -1,24 +1,20 @@
 ﻿using System;
 using UnityEngine.EventSystems;
-
-namespace Application
-{
     public class AngelicIntervention: Card, IPointerClickHandler
     {
         public AngelicIntervention()
         {
-            this.manaCost = 9;
+            this.manaCost = 8;
             this.playOnceOnly = false;
         }
         protected override void onPlay()
         {
             if (!playOnceOnly)
             {
-                discardRandomCards(2);
-                gameController.drawToHand(3);
+                destroyItem(2);
+                gameController.drawToHand(2);
                 playOnceOnly = true;
                 this.transform.SetParent(discard);
             }
         }
     }
-}

@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
      */
     //card list
     public static List<GameObject> MarketCards;
+    public List<GameObject> MarketCardsGameObject;
     public static List<GameObject> DrawDeck;
     public static List<GameObject> DiscardPile;
     public static List<GameObject> Hand;
@@ -114,7 +115,7 @@ public class GameController : MonoBehaviour
         manaNextTurn = 0;
         numberOfQuestCompleted = 0;
         turns = 0;
-        cardDrawed = 5;
+        cardDrawed = 0;
         initializeDrawDeck();
         initializeMarketCard();
         manaCount.text = mana.ToString();
@@ -124,6 +125,7 @@ public class GameController : MonoBehaviour
             Debug.Log(RANDOM);
             GameObject marketObj = Instantiate(MarketCards[RANDOM]);
             marketObj.transform.SetParent(marketPanel.transform);
+            MarketCardsGameObject.Add(marketObj);
         }
 
 
@@ -193,10 +195,10 @@ public class GameController : MonoBehaviour
     {
         for (int x = 0; x < 3; x++)
         {
-            MarketCards.Add(aegisOfOrenos);
+            //MarketCards.Add(aegisOfOrenos);
             MarketCards.Add(angelicIntervention);
 
-            MarketCards.Add(comfortingFlame);
+            //MarketCards.Add(comfortingFlame);
             //MarketCards.Add(consumePower);
             //MarketCards.Add(craft);
             //MarketCards.Add(divine);
@@ -212,7 +214,7 @@ public class GameController : MonoBehaviour
             //MarketCards.Add(manaVial);
             //MarketCards.Add(mindParasite);
             //MarketCards.Add(search);
-            //MarketCards.Add(shopKeepsFavor);
+            MarketCards.Add(shopKeepsFavor);
             //MarketCards.Add(spireOfPower);
             //MarketCards.Add(spiritIdol);
             //MarketCards.Add(warBeast);
@@ -247,6 +249,7 @@ public class GameController : MonoBehaviour
             GameController.Hand[x].transform.SetParent(handPanel.transform);
         }
     }
+
     public void deckOnClick()
     {
         deckScrollPanel.SetActive(!deckScrollPanel.activeSelf);
@@ -256,7 +259,15 @@ public class GameController : MonoBehaviour
         discardScrollPanel.SetActive(!discardScrollPanel.activeSelf);
     }
     public void onTurnEnd()
-    {
+    {   
+        foreach(GameObject go in Hand)
+        {
+            go.transform.SetParent(discardScrollPanel.transform);
+            DiscardPile.Add(go);
+            Hand.Remove(go);
+        }
+        drawToHand(5 + cardDrawed);
+        mana = manaNextTurn;
         turnOver = true;
         turnCount += 1;
         turnCounter.text = turnCount.ToString();
