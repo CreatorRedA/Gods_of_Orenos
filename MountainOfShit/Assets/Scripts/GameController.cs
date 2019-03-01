@@ -121,6 +121,7 @@ public class GameController : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             int RANDOM = Random.Range(0, MarketCards.Count);
+            Debug.Log(RANDOM);
             GameObject marketObj = Instantiate(MarketCards[RANDOM]);
             marketObj.transform.SetParent(marketPanel.transform);
         }
@@ -194,9 +195,8 @@ public class GameController : MonoBehaviour
         {
             MarketCards.Add(aegisOfOrenos);
             MarketCards.Add(angelicIntervention);
-            //MarketCards.Add(bladeOfAeons);
-            //MarketCards.Add(chronoLocket);
-            //MarketCards.Add(comfortingFlame);
+
+            MarketCards.Add(comfortingFlame);
             //MarketCards.Add(consumePower);
             //MarketCards.Add(craft);
             //MarketCards.Add(divine);
@@ -244,8 +244,7 @@ public class GameController : MonoBehaviour
 
         for (int x = 0; x < Hand.Count; x++)
         {
-            Instantiate(Hand[x], new Vector2(0, 0), Quaternion.identity,
-                GameObject.FindGameObjectWithTag("Hand").transform);
+            GameController.Hand[x].transform.SetParent(handPanel.transform);
         }
     }
     public void deckOnClick()

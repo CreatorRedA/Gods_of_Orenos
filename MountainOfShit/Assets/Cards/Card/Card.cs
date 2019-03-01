@@ -116,10 +116,14 @@ public class Card : MonoBehaviour, IPointerClickHandler
     {
         for (int i = 0; i < x; i++)
         {
+            if (GameController.Hand.Count == 0){
+                continue;
+            }
             int index = Random.Range(0, GameController.Hand.Count);
             GameController.Hand[index].transform.SetParent(discard);
             GameController.DiscardPile.Add(GameController.Hand[index]);
             GameController.Hand.RemoveAt(index);
+            
         }
     }
 }

@@ -16,10 +16,8 @@ namespace Application
             {
                 discardRandomCards(2);
                 gameController.drawToHand(3);
-
-                this.transform.SetParent(discard);
-
                 playOnceOnly = true;
+                this.transform.SetParent(discard);
             }
         }
     }
