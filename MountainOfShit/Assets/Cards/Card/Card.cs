@@ -18,7 +18,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
 
     public int totalMana;
 
-    private Transform hand;
+    public Transform hand;
     private Transform tableTop;
     private Transform market;
     public Transform discard;
@@ -52,7 +52,12 @@ public class Card : MonoBehaviour, IPointerClickHandler
     // Update is called once per frame
     public void Update()
     {
-        if(gameController.canDestroyItem&& cardType.Equals("Item"))
+        if (alreadyPurchased)
+        {
+            this.GetComponent<Draggable>().enabled = true;
+        }
+
+        if (gameController.canDestroyItem&& cardType.Equals("Item"))
         {
             Debug.Log("HI");
         }
@@ -106,5 +111,15 @@ public class Card : MonoBehaviour, IPointerClickHandler
     }
     public void changeManaCost(int change)
     {
+    }
+    public void discardRandomCards(int x)
+    {
+        for (int i = 0; i < x; i++)
+        {
+            int index = Random.Range(0, GameController.Hand.Count);
+            GameController.Hand[index].transform.SetParent(discard);
+            GameController.DiscardPile.Add(GameController.Hand[index]);
+            GameController.Hand.RemoveAt(index);
+        }
     }
 }

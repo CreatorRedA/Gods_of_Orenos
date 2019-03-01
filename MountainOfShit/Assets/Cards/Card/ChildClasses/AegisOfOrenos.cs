@@ -19,7 +19,6 @@ public class AegisOfOrenos : Card, IPointerClickHandler
         {
             gameController.addMana(manaAdd);
             playOnceOnly = true;
-            alreadyPurchased = true;
         }
     }
 }

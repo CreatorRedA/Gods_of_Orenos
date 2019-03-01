@@ -19,7 +19,7 @@ public class Wizard : Card, IPointerClickHandler
         {
             gameController.addMana(manaAdd);
             playOnceOnly = true;
-            this.transform.SetParent(discard);
+            this.transform.SetParent(hand);
         }
     }
 
