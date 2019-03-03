@@ -330,6 +330,8 @@ public class GameController : MonoBehaviour
         for (int x = 0; x < Hand.Count; x++)
         {
             GameController.Hand[x].transform.SetParent(handPanel.transform);
+            FindObjectOfType<AudioManager>().Play("draw");
+
         }
     }
 
