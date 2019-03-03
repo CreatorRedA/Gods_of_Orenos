@@ -17,6 +17,8 @@ public class SpireOfPower : Card
             GameController.cardDrawed += 1;
             playOnceOnly = true;
         }
+        GameController.ItemInUse.Add(this.gameObject);
+        GameController.Hand.Remove(this.gameObject);
     }
     public override void onDestroyItem()
     {

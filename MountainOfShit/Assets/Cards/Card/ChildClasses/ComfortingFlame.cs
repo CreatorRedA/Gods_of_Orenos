@@ -13,11 +13,11 @@ public class ComfortingFlame : Card
     }
     protected override void onPlay()
     {
-        manaAdd = 5;
         if (!playOnceOnly)
         {
             gameController.drawToHand(3);
             discardRandomCards(2);
+            playOnceOnly = true;
         }
     }
 }

@@ -15,6 +15,8 @@ public class ManaVial: Card
             gameController.addMana(1);
             playOnceOnly = true;
         }
+        GameController.ItemInUse.Add(this.gameObject);
+        GameController.Hand.Remove(this.gameObject);
     }
     public override void onDestroyItem()
     {

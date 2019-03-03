@@ -7,6 +7,10 @@ public class MindParasite: Card
     }
     protected override void onPlay()
     {
-        gameController.drawToHand(1);
+        if (!playOnceOnly)
+        {
+            gameController.drawToHand(1);
+            playOnceOnly = true;
+        }
     }
 }

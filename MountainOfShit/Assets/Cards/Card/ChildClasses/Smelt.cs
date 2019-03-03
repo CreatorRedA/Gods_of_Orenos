@@ -1,10 +1,19 @@
 ﻿using System;
-namespace Application
+public class Smelt : Card
 {
-    public class NewClass
+    public Smelt(){
+        this.manaCost = 3;
+        this.playOnceOnly = false;
+        this.alreadyPurchased = false;
+    }
+
+    protected override void onPlay()
     {
-        public NewClass()
+        if (!playOnceOnly)
         {
+            gameController.drawToHand(1);
+            discardRandomCards(1);
+            playOnceOnly = true;
         }
     }
 }
