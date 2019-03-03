@@ -29,10 +29,16 @@ public class GameController : MonoBehaviour
     public bool canDestroyItem;
     //quest indicator
     public bool questGorenaDone;
-    public static bool quest2done;
-    public static bool quest3done;
-    public static bool quest4done;
-    public static bool quest5done;
+    public static bool questVorconaDone;
+    public static bool questNiruDone;
+    public static bool questSentaalDone;
+    public static bool questIgejDone;
+
+    bool GorenaRewards;
+    bool VorconaRewards;
+    bool NiruRewards;
+    bool SentaalRewards;
+    bool IgejRewards;
 
     //panels
     public GameObject handPanel;
@@ -123,6 +129,11 @@ public class GameController : MonoBehaviour
         initializeDrawDeck();
         initializeMarketCard();
         manaCount.text = mana.ToString();
+        GorenaRewards = true;
+        VorconaRewards = true;
+        NiruRewards = true;
+        SentaalRewards = true;
+        IgejRewards = true;
         for (int i = 0; i < 5; i++)
         {
             int RANDOM = Random.Range(0, MarketCards.Count);
@@ -141,55 +152,80 @@ public class GameController : MonoBehaviour
         {
             endTheGame();
         }
-
+        Gorena();
+        Vorcona();
+        Niru();
+        Sentaal();
+        Igej();
     }
 
     void Gorena()
     {
-        if (mana >= 20)
+        if (mana >= 20 && GorenaRewards == true)
         {
             Debug.Log("HI");
             questGorenaDone = true;
             numberOfQuestCompleted += 1;
+
+            for (int x = 0; x < 2; x++)
+            {
+                int i = Random.Range(0, MarketCards.Count);
+                DiscardPile.Add(MarketCards[i]);
+                MarketCards[i].transform.SetParent(discardScrollPanel.transform);
+                MarketCards.RemoveAt(i);
+            }
+            GorenaRewards = false;
         }
     }
 
     void Vorcona()
     {
-        if (itemPlayed >= 7)
+        if (itemPlayed >= 7 && VorconaRewards == true)
         {
+            Card card = GameObject.Find("Card").GetComponent<Card>();
             questVorconaDone = true;
             numberOfQuestCompleted += 1;
+            card.changeManaCost(-2);
+            VorconaRewards = false;
         }
     }
 
     void Niru()
     {
-        if (cardDrawedThisTurn >= 5)
+        if (cardDrawedThisTurn >= 5 && NiruRewards == true)
         {
             questNiruDone = true;
             numberOfQuestCompleted += 1;
+            cardDrawed = 3;
+            NiruRewards = false;
         }
     }
 
     void Sentaal()
     {
-        if (creaturePlayed >= 7)
+        if (creaturePlayed >= 7 && SentaalRewards == true)
         {
             questSentaalDone = true;
             numberOfQuestCompleted += 1;
+            addMana(5);
+            SentaalRewards = false;
         }
     }
 
     void Igej()
     {
-        if (cardDiscarded >= 7)
+        if (cardDiscarded >= 7 && IgejRewards == true)
         {
             questIgejDone = true;
             numberOfQuestCompleted += 1;
+            for (int x = 0; x < ItemInUse.Count; x++)
+            {
+                ItemInUse[x].transform.SetParent(discardScrollPanel.transform);
+                DiscardPile.Add(ItemInUse[x]);
+                ItemInUse.RemoveAt(x);
+            }
         }
     }
-
     public void addMana(int manaAdd)
     {
         mana += manaAdd;
@@ -294,6 +330,8 @@ public class GameController : MonoBehaviour
         for (int x = 0; x < Hand.Count; x++)
         {
             GameController.Hand[x].transform.SetParent(handPanel.transform);
+            FindObjectOfType<AudioManager>().Play("draw");
+
         }
     }
 

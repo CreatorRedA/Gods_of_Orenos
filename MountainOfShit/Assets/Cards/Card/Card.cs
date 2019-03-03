@@ -95,6 +95,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
             this.GetComponent<Draggable>().enabled = true;
             gameController.looseMana(manaCost);
             this.alreadyPurchased = true;
+            FindObjectOfType<AudioManager>().Play("card_purchase");
         }
 
     }
