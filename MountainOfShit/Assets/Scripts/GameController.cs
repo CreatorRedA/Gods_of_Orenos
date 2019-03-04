@@ -13,6 +13,24 @@ public class GameController : MonoBehaviour
      * 
      * 43-0: Feiyi
      */
+    //curse list
+    public static bool pauperCurseActive;
+    public static bool inaneCurseActive;
+    public static bool somnusCurseActive;
+    public static bool malumCurseActive;
+    public static bool plagaCurseActive;
+    public static bool magicianCurseActive;
+    
+    public static bool pauperCurseWorking;
+    public static bool inaneCurseWorking;
+    public static bool somnusCurseWorking;
+    public static bool malumCurseWorking;
+    public static bool plagaCurseWorking;
+    public static bool magicianCurseWorking;
+
+    public static bool malumBlocking;
+    public int malumCards;
+    
     //card list
     public static List<GameObject> MarketCards;
     public List<GameObject> MarketCardsGameObject;
@@ -129,11 +147,27 @@ public class GameController : MonoBehaviour
         initializeDrawDeck();
         initializeMarketCard();
         manaCount.text = mana.ToString();
+
         GorenaRewards = true;
         VorconaRewards = true;
         NiruRewards = true;
         SentaalRewards = true;
         IgejRewards = true;
+
+        pauperCurseActive = false;
+        inaneCurseActive = false;
+        somnusCurseActive = false;
+        malumCurseActive = false;
+        magicianCurseActive = false;
+
+        pauperCurseWorking = false;
+        inaneCurseWorking = false;
+        somnusCurseWorking = false;
+        malumCurseWorking = false;
+        magicianCurseWorking = false;
+
+        malumBlocking = false;
+        malumCards = 0;
         for (int i = 0; i < 5; i++)
         {
             int RANDOM = Random.Range(0, MarketCards.Count);
@@ -152,13 +186,57 @@ public class GameController : MonoBehaviour
         {
             endTheGame();
         }
+        //quest
         Gorena();
         Vorcona();
         Niru();
         Sentaal();
         Igej();
+        //curse
+        Pauper();
+        malum();
     }
 
+    //curse functions
+    void Pauper()
+    {
+        if (pauperCurseActive == true && pauperCurseWorking == false)
+        {
+            Card card = GameObject.Find("Card").GetComponent<Card>();
+            card.changeManaCost(1);
+            pauperCurseWorking = true;
+        }
+    }
+
+    void inane()
+    {
+        if (inaneCurseActive == true && inaneCurseWorking == false)
+        {
+            Card card = GameObject.Find("Card").GetComponent<Card>();
+            card.discardRandomCards(1);
+            inaneCurseWorking = true;
+        }
+    }
+
+    void somnus()
+    {
+        if (somnusCurseActive == true && somnusCurseWorking == false)
+        {
+            mana -= 3;
+            somnusCurseWorking = true;
+        }
+    }
+
+    void malum()
+    {
+        if (malumCurseActive == true && malumCurseWorking == false)
+        {
+            malumBlocking = true;
+            malumCurseWorking = true;
+        }
+    }
+
+    //quest functions
     void Gorena()
     {
         if (mana >= 20 && GorenaRewards == true)
@@ -321,18 +399,42 @@ public class GameController : MonoBehaviour
 
     public void drawToHand(int i)
     {
-        for (int x = 0; x < i; x++)
+        if (malumBlocking == false)
         {
-            Hand.Add(DrawDeck[0]);
-            DrawDeck.RemoveAt(0);
-        }
+            for (int x = 0; x < i; x++)
+            {
+                Hand.Add(DrawDeck[0]);
+                DrawDeck.RemoveAt(0);
+            }
 
-        for (int x = 0; x < Hand.Count; x++)
+            for (int x = 0; x < Hand.Count; x++)
+            {
+                GameController.Hand[x].transform.SetParent(handPanel.transform);
+                FindObjectOfType<AudioManager>().Play("draw");
+                malumCards += 1;
+
+            }
+        }
+        else if (malumBlocking == true && malumCards <= 5)
         {
-            GameController.Hand[x].transform.SetParent(handPanel.transform);
-            FindObjectOfType<AudioManager>().Play("draw");
+            for (int x = 0; x < i; x++)
+            {
+                Hand.Add(DrawDeck[0]);
+                DrawDeck.RemoveAt(0);
+            }
 
+            for (int x = 0; x < Hand.Count; x++)
+            {
+                GameController.Hand[x].transform.SetParent(handPanel.transform);
+                FindObjectOfType<AudioManager>().Play("draw");
+                malumCards += 1;
+            }
         }
+        else if (malumBlocking == true && malumCards > 5)
+        {
+            Debug.Log("You can't draw due to Malum's curse!");
+        }
+        
     }
 
     public void deckOnClick()
@@ -343,6 +445,7 @@ public class GameController : MonoBehaviour
     {
         discardScrollPanel.SetActive(!discardScrollPanel.activeSelf);
     }
+
     public void onTurnEnd()
     {
         cardDrawedThisTurn = 0;
@@ -352,16 +455,42 @@ public class GameController : MonoBehaviour
             DiscardPile.Add(go);
             Hand.Remove(go);
         }
+        malumCards = 0;
         drawToHand(5 + cardDrawed);
         mana = manaNextTurn;
+        somnus();
         turnOver = true;
         turnCount += 1;
         turnCounter.text = turnCount.ToString();
+
+
         if (turnCount >= 8)
         {
             endGame();
         }
+        inane();
+
+
         canDestroyItem = false;
+
+        if (pauperCurseActive == true)
+        {
+            pauperCurseActive = false;
+            Card card = GameObject.Find("Card").GetComponent<Card>();
+            card.changeManaCost(-1);
+        }
+
+        inaneCurseActive = false;
+        somnusCurseActive = false;
+        malumCurseActive = false;
+        magicianCurseActive = false;
+
+        pauperCurseWorking = false;
+        inaneCurseWorking = false;
+        somnusCurseWorking = false;
+        malumCurseWorking = false;
+        magicianCurseWorking = false;
+        malumCards = 0;
     }
 
     public void destroyItem(GameObject clickedCard)
